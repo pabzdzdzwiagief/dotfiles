@@ -1,0 +1,19 @@
+[core]
+	editor = emacsclient -c
+	excludesfile = .gitignore
+
+[user]
+	name = pabzdzdzwiagief
+	mail = pabzdzdzwiagief@gmail.com
+	email = pabzdzdzwiagief@gmail.com
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+
+[alias]
+        ci = commit
+        di = diff --color-words
+        st = status

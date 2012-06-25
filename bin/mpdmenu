@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+exec mpc play `mpc playlist | grep -n '' | dmenu -i -l 10 | grep -Po '\d+' | head -n1`

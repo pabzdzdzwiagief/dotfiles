@@ -1,0 +1,33 @@
+!--< fonty >--!
+Xft.antialias:   true
+Xft.hinting:     true
+Xft.hintstyle:   hintslight
+Xft.dpi:         96
+
+!--< urxvt >--!
+urxvt.font:             xft:inconsolata:pixelsize=16
+urxvt.termName:         rxvt-unicode
+urxvt.scrollBar:        false
+urxvt.imLocale:         pl_PL.UTF-8
+urxvt.saveLines:        1024
+urxvt.xftAntialias:     true
+urxvt.jumpScroll:       true
+urxvt.internalBorder:   1
+urxvt.cursorBlink:      false
+urxvt.perl-ext-common:  default,tabbed
+
+!--< urxvt:kolorki >--!
+urxvt.transparent:	false
+urxvt.depth:		32
+urxvt.background:	rgba:1111/1111/1111/aaaa
+urxvt.foreground:       #ddccbb
+urxvt.buffered: 	true
+urxvt.shading:		33
+urxvt.fadeColor:	grey
+urxvt.fading:		2%
+urxvt.cursorColor:      #008888
+urxvt.cursorColor2:     #000000
+urxvt.colorBD:          #ffffff
+urxvt.colorIT:          #bbbbbb
+urxvt.colorUL:          #999999
+urxvt.underlineColor:   #999999

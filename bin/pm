@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+# This script assumes having sudo configred to allow running
+# halt/reboot/pm-* commands without password.
+
+sync
+
+case $1 in
+  halt)
+    sudo halt
+    ;;
+  reboot)
+    sudo reboot
+    ;;
+  sleep)
+    sudo pm-suspend
+    ;;
+  hibernate)
+    sudo pm-hibernate
+    ;;
+  *)
+    echo "usage: $0 {halt|hibernate|sleep|reboot}"
+esac

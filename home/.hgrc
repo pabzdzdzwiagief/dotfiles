@@ -1,0 +1,6 @@
+[ui]
+username = pabzdzdzwiagief <pabzdzdzwiagief@gmail.com>
+editor = emacsclient -c
+
+[web]
+cacerts = /etc/ssl/certs/ca-certificates.crt
