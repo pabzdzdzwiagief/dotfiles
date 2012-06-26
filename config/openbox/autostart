@@ -1,9 +1,10 @@
-setxkbmap pl
 IMAGES=( ~/Pictures/background/* )
 BACKGROUND=`printf "%s\n" "${IMAGES[RANDOM % ${#IMAGES[@]}]}"`
+setxkbmap pl
 xcompmgr -cfF -D3 &
 nitrogen --set-zoom-fill $BACKGROUND &
 conky &
 parcellite -n -d &
+mpd
 urxvtd -q -o -f
 ~/bin/emacsd restart
