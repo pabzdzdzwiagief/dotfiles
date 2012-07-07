@@ -42,7 +42,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Natura</name>
+    <name>Onyx</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -58,7 +58,7 @@
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
       <name>Sans</name>
-      <size>12</size>
+      <size>10</size>
       <!-- font size in points -->
       <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
@@ -67,7 +67,7 @@
     </font>
     <font place="InactiveWindow">
       <name>Sans</name>
-      <size>14</size>
+      <size>12</size>
       <!-- font size in points -->
       <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
