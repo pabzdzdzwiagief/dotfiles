@@ -10,15 +10,32 @@ audio_output {
     name                 "ALSA Device"
     mixer_type           "software"
     use_mmap             "yes"
-#   mpdauto_resample     "no"
+#   mpdauto_resample     "no"                  # smaller CPU usage, worse quality
 }
 
 # audio_output {
 # 	type		"httpd"
 # 	name		"HTTP Stream"
-# 	encoder		"vorbis"		# optional, vorbis or lame
+# 	encoder		"vorbis"               # optional, vorbis or lame
 # 	port		"8000"
-# 	quality		"5.0"			# do not define if bitrate is defined
-# #	bitrate		"128"			# do not define if quality is defined
+# 	quality		"5.0"	               # do not define if bitrate is defined
+# #	bitrate		"128"                  # do not define if quality is defined
 # 	format		"48000:16:1"
+# }
+
+# audio_output {
+#         type          "shout"
+#         name          "IceCast (ShoutCast-compatible) stream"
+#         host          "localhost"
+#         port          "8000"
+#         mount         "/icecast.ogg"
+#         password      "IceCast_mpd"
+#         quality       "5.0"
+# #       bitrate       "64"
+#         format        "44100:16:1"
+# # Optional Parameters
+#         user          "source"
+# #       encoding      "mp3"                # ogg by default
+# #       description   "here's my long description"
+# #       genre         "jazz"
 # }
