@@ -1,2 +1,9 @@
 #!/usr/bin/env sh
-exec mpc play `mpc playlist | grep -n '' | dmenu -i -l 10 | grep -Po '\d+' | head -n1`
+
+SELECTED_TRACK=`mpc playlist   \
+               |grep -n ''     \
+               |dmenu -i -l 10 \
+               |grep -Po '\d+' \
+               |head -n1       \
+               `
+exec mpc play $SELECTED_TRACK
