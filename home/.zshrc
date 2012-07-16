@@ -10,13 +10,17 @@ zstyle :compinstall filename '/home/lalman/.zshrc'
 
 autoload -Uz compinit
 autoload -U colors && colors
+autoload -U promptinit
 compinit
+promptinit
+
+zstyle ':completion:*' menu select
+prompt redhat
 
 # End of lines added by compinstall
 
 export EDITOR="emacsclient -c -nw"
 export WINEARCH="win32"
-export PS1='[%n@%m %1d]$ '
 
 bindkey "\e[7~" beginning-of-line
 bindkey "\e[8~" end-of-line
