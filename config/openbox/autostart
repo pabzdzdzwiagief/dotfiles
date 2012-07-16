@@ -2,7 +2,7 @@ IMAGES=( ~/Pictures/background/* )
 BACKGROUND=`printf "%s\n" "${IMAGES[RANDOM % ${#IMAGES[@]}]}"`
 setxkbmap pl
 xcompmgr -cfF -D3 &
-nitrogen --set-zoom-fill $BACKGROUND &
+nitrogen --set-auto $BACKGROUND &
 conky &
 parcellite -n -d &
 mpd
