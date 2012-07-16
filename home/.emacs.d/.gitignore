@@ -1,5 +1,6 @@
 *~
 *.elc
+*.dat
 ./*
 !elpa/*
 !init.el
