@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Set keyboard map to PL
+Comment=Required by certain Desktop Environments
+Exec=setxkbmap pl
+Terminal=false
+Type=Application
+NoDisplay=true

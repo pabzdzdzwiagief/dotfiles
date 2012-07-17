@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+IMAGES=( ${1-~/Pictures/background}/* )
+BACKGROUND=`printf "%s\n" "${IMAGES[RANDOM % ${#IMAGES[@]}]}"`
+exec nitrogen --set-auto $BACKGROUND

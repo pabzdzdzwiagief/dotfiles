@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Music Player Daemon
+Comment=Start MPD daemon for current user
+Exec=mpd
+Terminal=false
+Type=Application
+NoDisplay=true

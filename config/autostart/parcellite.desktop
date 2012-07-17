@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Parcellite
+Comment=Clipboard with history
+Exec=/usr/bin/parcellite -n -d
+Terminal=false
+Type=Application
+NoDisplay=true

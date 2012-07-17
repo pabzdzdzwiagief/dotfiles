@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Conky
+Comment=Conky system monitor
+Exec=conky
+Terminal=false
+Type=Application
+NoDisplay=true

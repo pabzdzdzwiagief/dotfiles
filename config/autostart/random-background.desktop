@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Random Background
+Comment=Use random image file as a background
+Exec=set-random-background
+Terminal=false
+Type=Application
+NoDisplay=true

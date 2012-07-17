@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=xcompmgr
+Comment=X Composition Manager
+Exec=xcompmgr -cfF -D3
+Terminal=false
+Type=Application
+NoDisplay=true

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Rxvt-Unicode Daemon
+Comment=Start urxvt daemon
+Exec=urxvtd -q -o -f
+Terminal=false
+Type=Application
+NoDisplay=true

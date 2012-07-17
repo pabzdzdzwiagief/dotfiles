@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Emacs Daemon
+Comment=Start Emacs editor daemon or replace already running one
+Exec=emacsd restart
+Terminal=false
+Type=Application
+NoDisplay=true
