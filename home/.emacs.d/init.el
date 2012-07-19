@@ -169,15 +169,11 @@
 
 (defun tty-theme ()
   "Hook for a new TTY frame theme"
-  (require 'color-theme-github)
-  (color-theme-github))
+  (load-theme 'tsdh-dark t))
 
 (defun window-theme ()
   "Hook for a new window-system-theme"
-  (require 'color-theme-github)
-  (color-theme-github)
-  (set-face-font 'default "Inconsolata-12"))
-
+  (require 'github-theme))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
 
