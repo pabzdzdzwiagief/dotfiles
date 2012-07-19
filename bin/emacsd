@@ -3,7 +3,7 @@
 case "$1" in
   start)
     echo "Starting Emacs daemon"
-    exec emacs --daemon &>/dev/null
+    exec emacs --daemon & #>/dev/null
     ;;
   stop)
     echo "Stopping Emacs daemon"

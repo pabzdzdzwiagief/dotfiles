@@ -62,7 +62,8 @@
 (defun clojure-mode-utils ()
   "Enable several utilities useful in clojure-mode"
   (add-completion-source ac-source-slime)
-  (paredit-mode +1))
+  (paredit-mode +1)
+  (eldoc-mode +1))
 
 (defun clojure-slime-enable ()
   "Power up `slime-mode' REPL"
@@ -76,6 +77,7 @@
   "Enable utils useful for messing with elisp"
   (add-hook 'emacs-lisp-mode-hook '(lambda ()
 				     (paredit-mode +1)
+				     (eldoc-mode +1)
 				     (ac-emacs-lisp-mode-setup)))
   (add-hook 'emacs-lisp-mode-hook 'general-programming))
 
@@ -169,11 +171,13 @@
 
 (defun tty-theme ()
   "Hook for a new TTY frame theme"
-  (load-theme 'tsdh-dark t))
+  (require 'github-theme))
 
 (defun window-theme ()
   "Hook for a new window-system-theme"
-  (require 'github-theme))
+  (require 'github-theme)
+  (set-face-font 'default "Inconsolata-12"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
 
