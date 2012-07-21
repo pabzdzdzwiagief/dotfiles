@@ -325,7 +325,7 @@
         <command>kfmclient openProfile filemanagement</command>
       </action>
     </keybind>
-    <!-- niestandardowe -->
+    <!-- My own -->
     <keybind key="C-S-p">
       <action name="Execute">
         <execute>urxvtc</execute>
@@ -343,7 +343,7 @@
     </keybind>
     <keybind key="W-p">
       <action name="Execute">
-        <execute>dmenu_run</execute>
+        <execute>dmenu_run -nb black -nf gray</execute>
       </action>
     </keybind>
     <keybind key="W-m">
@@ -790,8 +790,9 @@
 -->
     <application name="urxvt">
       <maximized>yes</maximized>
+      <decor>no</decor>
     </application>
-    <application name="chromium-browser">
+    <application name="google-chrome">
       <maximized>yes</maximized>
       <focused>yes</focused>
     </application>
