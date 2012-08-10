@@ -333,7 +333,7 @@
     </keybind>
     <keybind key="W-S-n">
       <action name="Execute">
-        <execute>google-chrome --incognito</execute>
+        <execute>chromium-browser --incognito</execute>
       </action>
     </keybind>
     <keybind key="W-S-f">
@@ -792,7 +792,7 @@
       <maximized>yes</maximized>
       <decor>no</decor>
     </application>
-    <application name="google-chrome">
+    <application name="chromium-browser">
       <maximized>yes</maximized>
       <focused>yes</focused>
     </application>
