@@ -326,17 +326,17 @@
       </action>
     </keybind>
     <!-- My own -->
-    <keybind key="C-S-p">
+    <keybind key="W-S-t">
       <action name="Execute">
         <execute>urxvtc</execute>
       </action>
     </keybind>
-    <keybind key="C-S-n">
+    <keybind key="W-S-n">
       <action name="Execute">
         <execute>google-chrome --incognito</execute>
       </action>
     </keybind>
-    <keybind key="C-S-f">
+    <keybind key="W-S-f">
       <action name="Execute">
         <execute>nautilus --no-desktop</execute>
       </action>
