@@ -6,7 +6,7 @@ bindkey -e
 eval `dircolors -b`
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/lalman/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 autoload -U colors && colors
@@ -18,9 +18,6 @@ zstyle ':completion:*' menu select
 prompt redhat
 
 # End of lines added by compinstall
-
-export EDITOR="emacsclient -c -nw"
-export WINEARCH="win32"
 
 bindkey "\e[7~" beginning-of-line
 bindkey "\e[8~" end-of-line
