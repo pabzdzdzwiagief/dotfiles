@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Tint2
+Comment=System tray
+Exec=tint2
+Terminal=false
+Type=Application
+NoDisplay=true
