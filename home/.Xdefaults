@@ -1,8 +1,9 @@
 !--< fonty >--!
-Xft.antialias:   true
-Xft.hinting:     true
-Xft.hintstyle:   hintslight
-Xft.dpi:         96
+Xft.antialias:          true
+Xft.hinting:            true
+Xft.hintstyle:          hintsfull
+Xft.dpi:                96
+Xft.lcdfilter:          lcdfilter
 
 !--< urxvt >--!
 urxvt.font:             xft:inconsolata:pixelsize=16
