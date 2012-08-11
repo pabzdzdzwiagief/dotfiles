@@ -6,10 +6,10 @@ sync
 
 case $1 in
   halt)
-    sudo shutdown --poweroff now
+    sudo shutdown -P now
     ;;
   reboot)
-    sudo shutdown --reboot now
+    sudo shutdown -r now
     ;;
   sleep)
     sudo pm-suspend
