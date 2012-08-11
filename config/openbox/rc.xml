@@ -42,7 +42,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Onyx</name>
+    <name>Nova-Gold</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -789,6 +789,10 @@
   # end of the example
 -->
     <application name="urxvt">
+      <maximized>yes</maximized>
+      <decor>no</decor>
+    </application>
+    <application name="emacs">
       <maximized>yes</maximized>
       <decor>no</decor>
     </application>
