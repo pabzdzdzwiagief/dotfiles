@@ -171,12 +171,12 @@
 
 (defun tty-theme ()
   "Hook for a new TTY frame theme"
-  (require 'github-theme))
+  (load-theme 'tango-dark))
 
 (defun window-theme ()
   "Hook for a new window-system-theme"
-  (require 'github-theme)
-  (set-face-font 'default "Inconsolata-12"))
+  (load-theme 'tango-dark)
+  (set-face-font 'default "Inconsolata-10"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
