@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+inotifywait --format "%w%f" -e modify -rmq ${1:-`pwd -L`} |
+while read modified
+do
+    echo -en "\e[1;30m[$(date --rfc-3339=seconds)] "
+    echo -en "\e[1;33m$modified"
+    echo -e  "\e[00m"
+    ${2:-make}
+done
