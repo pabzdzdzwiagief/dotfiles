@@ -171,12 +171,12 @@
 
 (defun tty-theme ()
   "Hook for a new TTY frame theme"
-  (load-theme 'tango-dark))
+  (load-theme 'wombat))
 
 (defun window-theme ()
   "Hook for a new window-system-theme"
-  (load-theme 'tango-dark)
-  (set-face-font 'default "Inconsolata-10"))
+  (load-theme 'wombat)
+  (set-face-font 'default "Source Code Pro Semibold-10"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
