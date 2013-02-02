@@ -1,6 +1,7 @@
 [core]
 	editor = emacsclient -c
 	excludesfile = .gitignore
+	autocrlf = input
 
 [user]
 	name = pabzdzdzwiagief
