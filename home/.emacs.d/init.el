@@ -57,18 +57,19 @@
 (defun clojure-mode-configuration ()
   (add-hook 'clojure-mode-hook 'clojure-mode-utils)
   (add-hook 'clojure-mode-hook 'general-programming)
-  (clojure-slime-enable))
+  (clojure-nrepl-utils))
 
 (defun clojure-mode-utils ()
   "Enable several utilities useful in clojure-mode"
-  (add-completion-source ac-source-slime)
-  (paredit-mode +1)
-  (eldoc-mode +1))
+  (paredit-mode +1))
 
-(defun clojure-slime-enable ()
-  "Power up `slime-mode' REPL"
-  (add-hook 'slime-repl-mode-hook 'clojure-mode-utils)
-  (add-hook 'slime-repl-mode-hook 'general-programming))
+(defun clojure-nrepl-utils ()
+  "Power up nREPL mode"
+  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+  (add-hook 'nrepl-mode-hook 'clojure-mode-utils)
+  (add-hook 'nrepl-mode-hook 'general-programming)
+  (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+  (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'nrepl-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs-lisp
