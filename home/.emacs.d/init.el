@@ -57,6 +57,8 @@
 (defun clojure-mode-configuration ()
   (add-hook 'clojure-mode-hook 'clojure-mode-utils)
   (add-hook 'clojure-mode-hook 'general-programming)
+  (add-hook 'clojurescript-mode-hook 'clojure-mode-utils)
+  (add-hook 'clojurescript-mode-hook 'general-programming)
   (clojure-nrepl-utils))
 
 (defun clojure-mode-utils ()
