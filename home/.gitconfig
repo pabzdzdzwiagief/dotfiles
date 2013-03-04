@@ -1,20 +1,24 @@
-[core]
-	editor = emacs
-	excludesfile = .gitignore
-	autocrlf = input
-
 [user]
-	name = pabzdzdzwiagief
-	mail = pabzdzdzwiagief@gmail.com
-	email = pabzdzdzwiagief@gmail.com
+    name = pabzdzdzwiagief
+    mail = pabzdzdzwiagief@gmail.com
+    email = pabzdzdzwiagief@gmail.com
+
+[core]
+    editor = emacs
+    excludesfile = .gitignore
+    autocrlf = input
 
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 
 [alias]
-        ci = commit
-        di = diff --color-words
-        st = status
+    ci = commit
+    di = diff --color-words
+    st = status -uall
+
+# local overrides
+[include]
+    path = ~/.config/git/me
