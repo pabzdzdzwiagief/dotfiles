@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+while true
+do
+    SNAPSHOT="$(TZ='UTC' date +%s).tar.xz"
+    echo -en "\e[1;30m[$(TZ='UTC' date --rfc-3339=seconds)] "
+    echo -en "\e[1;33m"${SNAPSHOT}" "
+    echo -e  "\e[00m"
+    tar -Jcvf ${SNAPSHOT} ${1}
+    echo -en "\e[1;33m"$(du -hac . | tail -n1)" "
+    echo -en "\e[1;33m("$(df -P . | tail -n1 | awk '{print $5}')")"
+    echo -e  "\e[00m"
+    sleep ${2:-600}
+done
