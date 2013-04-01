@@ -17,9 +17,9 @@
 (defun elpa-set-repos ()
   "Set ELPA repositories available for use"
   (setq package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
-			   ("elpa"      . "http://tromey.com/elpa/")
-			   ("marmalade" . "http://marmalade-repo.org/packages/")
-			   ("melpa"     . "http://melpa.milkbox.net/packages/"))))
+                           ("elpa"      . "http://tromey.com/elpa/")
+                           ("marmalade" . "http://marmalade-repo.org/packages/")
+                           ("melpa"     . "http://melpa.milkbox.net/packages/"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; path in .emacs.d
@@ -189,12 +189,19 @@
   (setq scroll-step 1)
   (setq default-tab-width 8)
   (setq ident-tabs-mode nil)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace))
+  (setq require-final-newline t)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'after-init-hook 'side-with-evil))
 
 (defun always-use-horizontal-split ()
   "Make emacs always split horizontally"
   (setq split-height-threshold nil)
   (setq split-width-threshold 0))
+
+(defun side-with-evil ()
+  "Introduce some VI-like behaviour to emacs"
+  (setq evil-default-cursor t)
+  (evil-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Go!

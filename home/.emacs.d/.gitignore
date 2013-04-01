@@ -2,5 +2,9 @@
 *.elc
 *.dat
 ./*
+autosaves/*
+auto-save-list/*
+backups/*
+session.*
 !elpa/*
 !init.el
