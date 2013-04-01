@@ -3,4 +3,4 @@
 import os
 import sys
 
-sys.stdout.write(os.path.relpath(sys.argv[1], sys.argv[2]))
+sys.stdout.write(os.path.relpath(sys.argv[1], sys.argv[2]) + '\n')

@@ -6,7 +6,7 @@ Xft.dpi:                96
 Xft.lcdfilter:          lcdfilter
 
 !--< urxvt >--!
-urxvt.font:             xft:inconsolata:pixelsize=14
+urxvt.font:             xft:source code pro:pixelsize=14
 urxvt.termName:         rxvt-unicode
 urxvt.scrollBar:        false
 urxvt.imLocale:         pl_PL.UTF-8
