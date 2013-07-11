@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+SESSION=urxvt
+exec urxvt -title urxvt -e sh -c "tmux has-session -t$SESSION && \
+                                  exec tmux attach-session -t$SESSION || \
+		                  exec tmux new-session -s$SESSION"
