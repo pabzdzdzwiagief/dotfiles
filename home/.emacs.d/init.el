@@ -3,6 +3,7 @@
   (autosave-to-home)
   (extend-load-path)
   (elpa-set-repos)
+  (install-packages)
   (use-utf-8)
   (configure-behaviour)
   (set-theme)
@@ -16,10 +17,36 @@
 
 (defun elpa-set-repos ()
   "Set ELPA repositories available for use"
-  (setq package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
-                           ("elpa"      . "http://tromey.com/elpa/")
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("elpa" . "http://tromey.com/elpa/")
                            ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa"     . "http://melpa.milkbox.net/packages/"))))
+                           ("melpa" . "http://melpa.milkbox.net/packages/"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Setup ELPA packages
+
+(defun install-packages ()
+  "Install ELPA packages if they are missing"
+  (unless (file-exists-p "~/.emacs.d/elpa")
+    (package-initialize)
+    (package-refresh-contents)
+    (dolist (p '(evil
+		 paredit
+		 rainbow-delimiters
+		 git-commit
+		 markdown-mode
+		 rust-mode
+		 clojure-mode
+		 clojurescript-mode
+		 cljdoc
+		 cljsbuild-mode
+		 google-c-style
+		 auto-complete
+		 auto-complete-clang
+		 ac-nrepl
+		 yasnippet-bundle
+		 xlicense))
+      (package-install p))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; path in .emacs.d
