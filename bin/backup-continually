@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-#TZ='UTC' inotifywait --format "%T" --timefmt="%T" -e close_write -rmq ${1} |
-cat -u |
+[[ $1 == "--help" ]] && echo """\
+Usage: backup-continually [FILE]
+Compress FILE (the current directory by default) on change and leave timestamped
+tarballs in the current directory.""" && exit 0
+
+inotifywait --format "%w%f" -e modify -rmq ${1:-`pwd -L`} |
 stdbuf -oL cut -c 1-4 | # 14:25:33 -> 14:2
 stdbuf -oL uniq |
 while read modified

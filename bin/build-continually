@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+[[ $1 == "--help" ]] && echo """\
+Usage: build-continually [FILE] [COMMAND]
+Execute COMMAND ("make" by default) every time FILE (the current directory by
+default) changes.""" && exit 0
+
 inotifywait --format "%w%f" -e modify -rmq ${1:-`pwd -L`} |
 while read modified
 do

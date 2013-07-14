@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+[[ $1 == "--help" ]] && echo """\
+Usage: backup-with-interval [FILE] [NUMBER]
+Compress FILE (the current directory by default) every NUMBER seconds (600 by
+default) and leave timestamped tarballs in current directory.""" && exit 0
+
 while true
 do
     SNAPSHOT="$(TZ='UTC' date +%s).tar.xz"
