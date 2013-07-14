@@ -1,15 +1,33 @@
-pabżdźdźwiągief's dotfiles
-==========================
+dotfiles
+========
 
-This repository contains pabżdźdźwiągief's configuration files put
-under version control.
+pabżdźdźwiągief's configuration files.
+
+The purpose of these configuration files is to establish a fairly usable
+Unix environment that consists specifically of the following programs:
+
+- emacs,
+- openbox,
+- conky,
+- nitrogen,
+- dmenu,
+- urxvt,
+- tmux,
+- zsh.
+
+There is also a bunch of somewhat trivial, but ocasionally useful scripts.
+
 
 installation
 ------------
 
-Files in `home` directory should be accessed via symlinks from $HOME directory.
+Clone this repo somewhere (e.g. in `~/.config`) and run `make install` to
+symlink its contents inside the `$HOME` directory.
 
-Files in `config` should be symlinked in `.config` directory.
 
-Scripts contained in `bin` can be linked from anywhere in $PATH, but preferably
-it should be `$HOME/bin`.
+license
+-------
+
+All files are under the permissive
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) license unless
+stated otherwise.
