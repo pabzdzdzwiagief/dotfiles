@@ -5,3 +5,4 @@ Exec=emacsd restart
 Terminal=false
 Type=Application
 NoDisplay=true
+

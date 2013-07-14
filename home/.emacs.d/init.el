@@ -3,7 +3,7 @@
   (autosave-to-home)
   (extend-load-path)
   (elpa-set-repos)
-  (install-packages)
+  (first-run-install)
   (use-utf-8)
   (configure-behaviour)
   (set-frame-look)
@@ -12,7 +12,7 @@
   (c-mode-configuration)
   (emacs-lisp-mode-configuration))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Specify ELPA repositories
 
 (defun elpa-set-repos ()
@@ -22,10 +22,10 @@
                            ("marmalade" . "http://marmalade-repo.org/packages/")
                            ("melpa" . "http://melpa.milkbox.net/packages/"))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup ELPA packages
 
-(defun install-packages ()
+(defun first-run-install ()
   "Install ELPA packages if they are missing"
   (unless (file-exists-p "~/.emacs.d/elpa")
     (package-initialize)
@@ -48,7 +48,7 @@
 		 xlicense))
       (package-install p))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; path in .emacs.d
 
 (defun extend-load-path ()
@@ -58,7 +58,7 @@
   (let ((default-directory  "~/.emacs.d/site-lisp"))
     (normal-top-level-add-subdirs-to-load-path)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; general programming
 
 (defun general-programming ()
@@ -78,7 +78,7 @@
 (defun add-completion-source (completion-source)
   (setq ac-sources (append (list completion-source) ac-sources)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
 
 (defun clojure-mode-configuration ()
@@ -100,7 +100,7 @@
   (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
   (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'nrepl-mode)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs-lisp
 
 (defun emacs-lisp-mode-configuration ()
@@ -111,7 +111,7 @@
 				     (ac-emacs-lisp-mode-setup)))
   (add-hook 'emacs-lisp-mode-hook 'general-programming))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clang
 
 (defun c-mode-configuration()
@@ -135,7 +135,7 @@
   (require 'auto-complete-clang)
   (setq ac-sources '(ac-source-yasnippet ac-source-clang)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; autosave
 ;; trick - http://snarfed.org/gnu_emacs_backup_files
 
@@ -148,7 +148,7 @@
   (make-directory "~/.emacs.d/autosaves/" t)
   (make-directory "~/.emacs.d/backups/" t))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; utf-8
 ;; trick - http://gentoo-wiki.com/HOWTO_Make_your_system_use_unicode/utf-8#Editors
 
@@ -160,7 +160,7 @@
   (setq selection-coding-system 'utf-8)
   (setq prefer-coding-system 'utf-8))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; look
 
 (defun unclutter-emacs-window ()
@@ -181,7 +181,7 @@
   (add-to-list 'default-frame-alist '(font . "Source Code Pro Semibold-10"))
   (load-theme 'wombat))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
 
 (defun configure-behaviour ()
@@ -203,7 +203,7 @@
   (setq evil-default-cursor t)
   (evil-mode t))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Go!
 
 (init)
