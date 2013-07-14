@@ -28,7 +28,6 @@ bindkey "\e[3~" delete-char
 alias ls='ls --color=auto -F'
 alias ll='ls --color=auto -F -al'
 alias la='ls --color=auto -F -a'
-alias chromium-browser='google-chrome --incognito'
 alias dmenu='dmenu -nf white -nb black'
 alias urxvt='urxvtc'
 alias emacs='emacsclient -c'
