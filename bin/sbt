@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-exec java -Xmx512M -jar /usr/share/sbt/sbt-launch.jar "$@"
