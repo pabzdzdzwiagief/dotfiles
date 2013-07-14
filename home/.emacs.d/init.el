@@ -6,7 +6,7 @@
   (install-packages)
   (use-utf-8)
   (configure-behaviour)
-  (set-theme)
+  (set-frame-look)
   (unclutter-emacs-window)
   (clojure-mode-configuration)
   (c-mode-configuration)
@@ -162,7 +162,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; look
-;; faces trick - http://superuser.com/questions/292880/emacs-as-daemon-on-os-x-with-window-system
 
 (defun unclutter-emacs-window ()
   "Remove scrollbars, toolbars and such"
@@ -177,36 +176,10 @@
    '(blink-cursor-mode nil))
   (global-hl-line-mode t))
 
-(defun set-theme ()
-  "Set theme for window or tty frame"
-  (add-hook 'after-make-frame-functions 'run-after-make-frame-hooks)
-  (add-hook 'after-init-hook (lambda ()
-			       (run-after-make-frame-hooks (selected-frame))))
-  (add-hook 'after-make-window-system-frame-hooks 'window-theme)
-  (add-hook 'after-make-console-frame-hooks 'tty-theme))
-
-(defun run-after-make-frame-hooks (frame)
-  "Selectively run either `after-make-console-frame-hooks' or
-   `after-make-window-system-frame-hooks'"
-  (select-frame frame)
-  (run-hooks (if window-system
-	       'after-make-window-system-frame-hooks
-	       'after-make-console-frame-hooks)))
-
-(defvar after-make-console-frame-hooks '()
-  "Hooks to run after creating a new TTY frame")
-
-(defvar after-make-window-system-frame-hooks '()
-  "Hooks to run after creating a new window-system frame")
-
-(defun tty-theme ()
-  "Hook for a new TTY frame theme"
+(defun set-frame-look ()
+  "Set font and theme for emacs frame"
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro Semibold-10"))
   (load-theme 'wombat))
-
-(defun window-theme ()
-  "Hook for a new window-system-theme"
-  (load-theme 'wombat)
-  (set-face-font 'default "Source Code Pro Semibold-10"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
