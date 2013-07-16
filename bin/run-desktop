@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+
+from sys import argv, exit
+from configparser import SafeConfigParser
+from subprocess import call
+
+parser = SafeConfigParser()
+config_file = argv[1]
+parser.read(config_file)
+return_code = call(parser.get("Desktop Entry", "Exec"), shell=True)
+exit(return_code)
