@@ -1,3 +1,4 @@
 export PATH="$PATH":"$HOME/.local/bin"
-export EDITOR="emacsclient -c -nw"
+export VISUAL="emacs -nw"
+export EDITOR="vi"
 export WINEARCH="win32"
