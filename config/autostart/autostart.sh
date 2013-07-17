@@ -1,8 +1,13 @@
-#!/usr/bin/env sh
+!/usr/bin/env sh
 
 cd ~/.config/autostart
 
-run-desktop "/etc/xdg/autostart/gnome-settings-daemon.desktop" &
+for program in "gnome-settings-daemon" \
+               "gnome-keyring-daemon"  \
+               "nm-applet"
+do
+    run-desktop "/etc/xdg/autostart/$program.desktop" &
+done
 
 for program in *.desktop
 do
