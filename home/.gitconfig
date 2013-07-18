@@ -4,7 +4,6 @@
     email = pabzdzdzwiagief@gmail.com
 
 [core]
-    editor = emacs -nw
     excludesfile = .gitignore
     autocrlf = input
 
