@@ -2,4 +2,4 @@
 
 IMAGES=( ${1-~/Pictures/backgrounds}/* )
 BACKGROUND=`printf "%s\n" "${IMAGES[RANDOM % ${#IMAGES[@]}]}"`
-exec nitrogen --set-auto $BACKGROUND
+exec nitrogen --set-zoom-fill $BACKGROUND
