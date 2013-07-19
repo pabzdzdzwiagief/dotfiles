@@ -1,6 +1,5 @@
 [ui]
 username = pabzdzdzwiagief <pabzdzdzwiagief@gmail.com>
-editor = emacsclient -c
 
 # uncomment when using system on which hg cannot find proper location
 #[web]
