@@ -1,23 +1,23 @@
 [user]
-    name = pabzdzdzwiagief
-    mail = pabzdzdzwiagief@gmail.com
-    email = pabzdzdzwiagief@gmail.com
+name = pabzdzdzwiagief
+mail = pabzdzdzwiagief@gmail.com
+email = pabzdzdzwiagief@gmail.com
 
 [core]
-    excludesfile = .gitignore
-    autocrlf = input
+excludesfile = .gitignore
+autocrlf = input
 
 [color]
-    branch = auto
-    diff = auto
-    interactive = auto
-    status = auto
+branch = auto
+diff = auto
+interactive = auto
+status = auto
 
 [alias]
-    ci = commit
-    di = diff --color-words
-    st = status -uall
+ci = commit
+di = diff --color-words
+st = status -uall
 
 # local overrides
 [include]
-    path = ~/.config/git/me
+path = ~/.config/git/me
