@@ -28,7 +28,7 @@ bindsym $mod+1 exec firefox
 bindsym $mod+2 exec emacs
 bindsym $mod+3 exec tmux-terminal
 bindsym $mod+4 exec nautilus --no-desktop
-bindsym $mod+5 exec exec run-desktop "~/.local/share/applications/Team Fortress 2.desktop"
+bindsym $mod+5 exec exec run-desktop ~/.local/share/applications/Team\ Fortress\ 2.desktop
 
 # change focus
 bindsym $mod+Left focus left
