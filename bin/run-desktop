@@ -1,15 +1,3 @@
-#!/usr/bin/env python
+#!/usr/bin/env sh
 
-from sys import argv, version_info, exit
-from subprocess import call
-
-if version_info >= (3, 0):
-    from configparser import SafeConfigParser
-else:
-    from ConfigParser import SafeConfigParser
-
-parser = SafeConfigParser()
-config_file = argv[1]
-parser.read(config_file)
-return_code = call(parser.get("Desktop Entry", "Exec"), shell=True)
-exit(return_code)
+exec `get-config "$1" "Desktop Entry" "Exec"`
