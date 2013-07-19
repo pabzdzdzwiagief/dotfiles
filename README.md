@@ -7,8 +7,7 @@ The purpose of these configuration files is to establish a fairly usable
 Unix environment that consists specifically of the following programs:
 
 - emacs,
-- openbox,
-- conky,
+- i3,
 - nitrogen,
 - dmenu,
 - urxvt,
