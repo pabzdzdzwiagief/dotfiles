@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+exec dmenu_run -nf white -nb black
