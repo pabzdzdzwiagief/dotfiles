@@ -19,12 +19,6 @@ prompt redhat
 
 # End of lines added by compinstall
 
-bindkey "\e[7~" beginning-of-line
-bindkey "\e[8~" end-of-line
-bindkey "\e[5~" beginning-of-history
-bindkey "\e[6~" end-of-history
-bindkey "\e[3~" delete-char
-
 alias ls='ls --color=auto -F'
 alias mg='mg -n'
 alias cp='cp -i'
