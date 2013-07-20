@@ -21,7 +21,7 @@ floating_modifier $mod
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run -nf white -nb black
+bindsym $mod+p exec dmenu-dark
 
 exec --no-startup-id ~/.config/autostart/autostart.sh
 bindsym $mod+1 exec firefox
