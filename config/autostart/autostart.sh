@@ -3,7 +3,7 @@
 cd ~/.config/autostart
 
 for program in "gnome-settings-daemon" \
-               "gnome-keyring-daemon"  \
+               "gnome-keyring-pkcs11"  \
                "nm-applet"
 do
     run-desktop "/etc/xdg/autostart/$program.desktop" &
