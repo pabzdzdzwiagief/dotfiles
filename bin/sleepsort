@@ -1,7 +1,9 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 [ $# -gt 0 ] || exit 0
-$0 ${@:2} &
-sleep $1
-echo -n "$1 "
-
+N=$1
+shift
+$0 $@ &
+sleep $N
+echo -n "$N "
+wait
