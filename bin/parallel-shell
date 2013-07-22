@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+from shlex import split
+from subprocess import call
+from sys import stdin
+from threading import Thread
+
+while True:
+    command = stdin.readline()
+    if command:
+        Thread(target=call, args=[split(command)]).start()
+    else:
+        break
