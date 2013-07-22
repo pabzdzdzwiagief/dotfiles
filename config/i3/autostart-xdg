@@ -1,6 +1,4 @@
-!/usr/bin/env sh
-
-cd ~/.config/autostart
+#!/usr/bin/env sh
 
 for program in "gnome-settings-daemon" \
                "gnome-keyring-pkcs11"  \
@@ -9,7 +7,7 @@ do
     run-desktop "/etc/xdg/autostart/$program.desktop" &
 done
 
-for program in *.desktop
+for program in ~/.config/autostart/*.desktop
 do
     run-desktop "$program" &
 done
