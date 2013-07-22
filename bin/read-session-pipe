@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+PIPE=/tmp/"$1"-`id -u $USER`/"$2"
+mkdir -p --mode=700 `dirname "$PIPE"`
+if [ -p "$PIPE" ]
+then
+    exit 1
+else
+    mkfifo --mode=600 "$PIPE"
+fi
+while true
+do
+    cat "$PIPE"
+done

@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+PIPE=/tmp/"$1"-`id -u $USER`/"$2"
+mkdir -p --mode=700 `dirname "$PIPE"`
+[ -p "$PIPE" ] || mkfifo --mode=600 "$PIPE"
+exec flock "$PIPE" cat >> "$PIPE"
