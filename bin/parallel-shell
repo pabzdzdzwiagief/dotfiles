@@ -1,13 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env bash
 
-from shlex import split
-from subprocess import call
-from sys import stdin
-from threading import Thread
+while read cmd
+do
+    sh -c "exec $cmd" &
+done
 
-while True:
-    command = stdin.readline()
-    if command:
-        Thread(target=call, args=[split(command)]).start()
-    else:
-        break
+wait
