@@ -29,7 +29,7 @@ bindsym $mod+1 exec pgroup i3 "firefox"
 bindsym $mod+2 exec pgroup i3 "emacs"
 bindsym $mod+3 exec pgroup i3 "tmux-terminal"
 bindsym $mod+4 exec pgroup i3 "nautilus --no-desktop"
-bindsym $mod+5 exec pgroup i3 "run-desktop ~/.local/share/applications/Team\ Fortress\ 2.desktop"
+bindsym $mod+5 exec pgroup i3 "steam steam://rungameid/440"
 
 # change focus
 bindsym $mod+Left focus left
