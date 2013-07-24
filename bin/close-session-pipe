@@ -3,8 +3,5 @@
 pipe=/tmp/"$1"-`id -u $USER`/"$2"
 mkdir -p --mode=700 `dirname "$pipe"`
 [ -p "$pipe" ] || mkfifo --mode=600 "$pipe"
-umask 277 && echo $$ > "$pipe".pid || exit 1
-while [ -e "$pipe".pid ]
-do
-    cat "$pipe"
-done
+[ -e "$pipe".pid ] || exit 0
+exec flock "$pipe" -c "rm -f \"$pipe\".pid && echo -n" >> "$pipe"

@@ -2,7 +2,7 @@
 
 while read cmd
 do
-    sh -c "exec $cmd" &
+    $cmd &
 done
 
 wait
