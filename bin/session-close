@@ -4,4 +4,9 @@ pipe=/tmp/"$1"-`id -u $USER`/"$2"
 mkdir -p --mode=700 `dirname "$pipe"`
 [ -p "$pipe" ] || mkfifo --mode=600 "$pipe"
 [ -e "$pipe".pid ] || exit 0
-exec flock "$pipe" -c "rm -f \"$pipe\".pid && echo -n" >> "$pipe"
+if [ -d /proc/`cat "$pipe".pid` ]
+then
+    exec flock "$pipe" -c "rm \"$pipe\".pid && echo -n" >> "$pipe"
+else
+    exec flock "$pipe" -c "rm \"$pipe\".pid"
+fi

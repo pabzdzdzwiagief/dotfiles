@@ -8,9 +8,9 @@ case "$2" in
         exec session-close pgroup "$1"
         ;;
 "kill-group")
-	pid=`session-get-pid pgroup $1`
-	pgid=`ps -opgid='' -p$pid | xargs echo`
+        pid=`session-get-pid pgroup $1` || exit 1
+        pgid=`ps -opgid='' -p$pid | xargs echo`
         session-close pgroup "$1"
-	kill -KILL -$pgid
+        [ -n "$pgid" ] && kill -TERM -$pgid
         ;;
 esac
