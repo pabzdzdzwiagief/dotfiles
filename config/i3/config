@@ -21,15 +21,14 @@ floating_modifier $mod
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec pgroup i3 "dmenu-dark"
+bindsym $mod+p exec pgroup i3 join "dmenu-dark"
 
-exec --no-startup-id pgroupd i3
-exec --no-startup-id pgroup i3 ~/.config/i3/autostart-xdg
-bindsym $mod+1 exec pgroup i3 "firefox"
-bindsym $mod+2 exec pgroup i3 "emacs"
-bindsym $mod+3 exec pgroup i3 "tmux-terminal"
-bindsym $mod+4 exec pgroup i3 "nautilus --no-desktop"
-bindsym $mod+5 exec pgroup i3 "steam steam://rungameid/440"
+exec --no-startup-id ~/.config/i3/autostart
+bindsym $mod+1 exec pgroup i3 join "firefox"
+bindsym $mod+2 exec pgroup i3 join "emacs"
+bindsym $mod+3 exec pgroup i3 join "tmux-terminal"
+bindsym $mod+4 exec pgroup i3 join "nautilus --no-desktop"
+bindsym $mod+5 exec pgroup i3 join "steam steam://rungameid/440"
 
 # change focus
 bindsym $mod+Left focus left
