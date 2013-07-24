@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+pipe=/tmp/"$1"-`id -u $USER`/"$2"
+mkdir -p --mode=700 `dirname "$pipe"`
+[ -p "$pipe" ] || mkfifo --mode=600 "$pipe"
+exec cat "$pipe".pid
