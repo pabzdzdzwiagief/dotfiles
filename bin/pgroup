@@ -1,3 +1,16 @@
 #!/usr/bin/env sh
 
-echo "$2" | write-to-session-pipe pgroup "$1"
+case "$2" in
+"join")
+        echo "$3" | session-write pgroup "$1"
+        ;;
+"kill")
+        exec session-close pgroup "$1"
+        ;;
+"kill-group")
+	pid=`session-get-pid pgroup $1`
+	pgid=`ps -opgid='' -p$pid | xargs echo`
+        session-close pgroup "$1"
+	kill -KILL -$pgid
+        ;;
+esac
