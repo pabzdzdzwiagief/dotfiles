@@ -1,4 +1,4 @@
-NEW_HOME = /home/$(USER)
+NEW_HOME = $(HOME)
 
 BIN_TARGETS = $(notdir $(wildcard bin/*))
 HOME_TARGETS = $(notdir $(wildcard home/.*))
