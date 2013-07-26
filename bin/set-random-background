@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-IMAGES=( `find -L ${1-~/Pictures/backgrounds} -type f` )
-BACKGROUND=`printf "%s\n" "${IMAGES[RANDOM % ${#IMAGES[@]}]}"`
-exec nitrogen --set-zoom-fill $BACKGROUND
+find -L ${1-~/Pictures/backgrounds} -type f |\
+shuf -n1                                    |\
+xargs -I{} nitrogen --set-zoom-fill "{}"
