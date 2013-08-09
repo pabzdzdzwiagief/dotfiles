@@ -24,7 +24,6 @@ Installation requirements:
 - GNU Make
 - GNU Wget
 - Python
-- unzip
 
 license
 -------

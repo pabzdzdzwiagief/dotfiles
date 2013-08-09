@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+
+from sys import argv
+from zipfile import ZipFile
+
+z = ZipFile(argv[1])
+try:
+    z.extractall()
+finally:
+    z.close()
