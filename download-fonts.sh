@@ -2,8 +2,7 @@
 
 mkdir fonts
 cd fonts
-curl "http://garr.dl.sourceforge.net/project/sourcecodepro.adobe/"\
-"SourceCodePro_FontsOnly-1.017.zip" > SourceCodePro.zip
-unzip SourceCodePro.zip
+wget "http://sourceforge.net/projects/sourcecodepro.adobe/files/SourceCodePro_FontsOnly-1.017.zip"
+unzip SourceCodePro_FontsOnly-1.017.zip
 mv SourceCodePro_FontsOnly-1.017/OTF/*.otf .
 rm -rf SourceCodePro_FontsOnly-1.017 SourceCodePro.zip
