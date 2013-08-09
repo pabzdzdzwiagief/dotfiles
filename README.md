@@ -1,21 +1,18 @@
 dotfiles
 ========
 
-pabżdźdźwiągief's configuration files.
+pabżdźdźwiągief's configuration files and scripts.
 
-The purpose of these configuration files is to establish a fairly usable
-Unix environment that consists specifically of the following programs:
-
-- emacs,
-- i3,
-- nitrogen,
-- dmenu,
-- urxvt,
-- tmux,
-- zsh.
-
-There is also a bunch of somewhat trivial, but ocasionally useful scripts.
-
+Programs used:
+- emacs
+- nitrogen
+- parcellite
+- dmenu
+- i3
+- mpd
+- urxvt
+- tmux
+- zsh
 
 installation
 ------------
@@ -23,6 +20,11 @@ installation
 Clone this repo somewhere (e.g. in `~/.config`) and run `make install` to
 symlink its contents inside the `$HOME` directory.
 
+Installation requirements:
+- GNU Make
+- GNU Wget
+- Python
+- unzip
 
 license
 -------
