@@ -15,6 +15,7 @@ install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
          $(HOME_TARGETS:%=$(NEW_HOME)/%) \
          $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
          $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf)
+	fc-cache -f -v
 
 $(NEW_HOME)/.local/bin/%: $(NEW_HOME)/.local/bin
 	ln -s `bin/relpath bin $(NEW_HOME)/.local/bin`/$* $@
