@@ -1,6 +1,6 @@
 NEW_HOME = $(HOME)
 
-BIN_TARGETS = $(notdir $(wildcard bin/*))
+BIN_TARGETS = $(notdir $(wildcard bin/*) bin/idea)
 HOME_TARGETS = $(notdir $(wildcard home/.*))
 CONFIG_TARGETS = $(notdir $(wildcard config/*))
 FONTS_TARGETS = SourceCodePro-Bold \
@@ -17,6 +17,10 @@ install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
          $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
          $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf)
 	fc-cache -f -v
+
+$(NEW_HOME)/.local/bin/idea: | $(NEW_HOME)/.local/bin $(NEW_HOME)/.local/share
+	./download-idea.sh
+	ln -s $(NEW_HOME)/.local/share/idea/bin/idea.sh $@
 
 $(NEW_HOME)/.local/bin/%: | $(NEW_HOME)/.local/bin
 	ln -s `bin/relpath bin $(NEW_HOME)/.local/bin`/$* $@
@@ -35,6 +39,9 @@ $(NEW_HOME)/%: | $(NEW_HOME) home/$*
 	ln -s `bin/relpath home $(NEW_HOME)`/$* $@
 
 $(NEW_HOME)/.local/bin: | $(NEW_HOME)
+	mkdir -p $@
+
+$(NEW_HOME)/.local/share: | $(NEW_HOME)
 	mkdir -p $@
 
 $(NEW_HOME)/.config: | $(NEW_HOME)
