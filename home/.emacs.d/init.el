@@ -9,6 +9,7 @@
   (set-frame-look)
   (unclutter-emacs-window)
   (clojure-mode-configuration)
+  (python-mode-configuration)
   (c-mode-configuration)
   (emacs-lisp-mode-configuration))
 
@@ -112,9 +113,32 @@
   (add-hook 'emacs-lisp-mode-hook 'general-programming))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; python mode
+;; source: http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
+
+(defun python-mode-configuration ()
+  "Configure python mode"
+  (add-hook 'python-mode-hook 'python-ipython)
+  (add-hook 'python-mode-hook 'general-programming))
+
+(defun python-ipython ()
+  "Use ipython3 in python-shell"
+  (setq
+     python-shell-interpreter "ipython3"
+     python-shell-interpreter-args ""
+     python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+     python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+     python-shell-completion-setup-code
+     "from IPython.core.completerlib import module_completion"
+     python-shell-completion-module-string-code
+     "';'.join(module_completion('''%s'''))\n"
+     python-shell-completion-string-code
+     "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clang
 
-(defun c-mode-configuration()
+(defun c-mode-configuration ()
   (add-hook 'c-mode-common-hook 'linux-c-mode)
   (add-hook 'c-mode-common-hook 'google-c++-mode)
   (add-hook 'c-mode-common-hook 'clang-completion)
