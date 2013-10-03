@@ -20,10 +20,8 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+p exec pgroup i3 join "dmenu-dark"
-
 exec --no-startup-id ~/.config/i3/autostart
+bindsym $mod+0 exec pgroup i3 join "dmenu-dark"
 bindsym $mod+1 exec pgroup i3 join "firefox"
 bindsym $mod+2 exec pgroup i3 join "emacs"
 bindsym $mod+3 exec pgroup i3 join "tmux-terminal"
