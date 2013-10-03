@@ -27,6 +27,7 @@ bindsym $mod+2 exec pgroup i3 join "emacs"
 bindsym $mod+3 exec pgroup i3 join "tmux-terminal"
 bindsym $mod+4 exec pgroup i3 join "nautilus --no-desktop"
 bindsym $mod+5 exec pgroup i3 join "thunderbird"
+bindsym $mod+m exec pgroup i3 join "mpdmenu"
 
 # change focus
 bindsym $mod+Left focus left
