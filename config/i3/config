@@ -89,6 +89,7 @@ bindsym $mod+Shift+E exit
 bar {
         status_command i3status
 	position top
+	mode hide
 }
 
 new_window none
