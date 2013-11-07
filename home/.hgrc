@@ -1,6 +1,9 @@
 [ui]
 username = pabzdzdzwiagief <pabzdzdzwiagief@gmail.com>
 
+[extensions]
+mq=
+
 # uncomment when using system on which hg cannot find proper location
 #[web]
 #cacerts = /etc/ssl/certs/ca-certificates.crt
