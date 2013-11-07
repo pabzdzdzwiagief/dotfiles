@@ -5,12 +5,19 @@ log_file                 "~/.cache/mpd/mpd.log"
 pid_file                 "~/.cache/mpd/mpd.pid"
 state_file               "~/.cache/mpd/mpdstate"
 
+# audio_output {
+#     type                 "alsa"
+#     name                 "ALSA Device"
+#     mixer_type           "software"
+#     use_mmap             "yes"
+# #   mpdauto_resample     "no"                  # smaller CPU usage, worse quality
+# }
+
 audio_output {
-    type                 "alsa"
-    name                 "ALSA Device"
-    mixer_type           "software"
-    use_mmap             "yes"
-#   mpdauto_resample     "no"                  # smaller CPU usage, worse quality
+    type    "pulse"
+    name    "PulseAudio"
+    #server  "localhost"   # optional
+    #sink    "alsa_output" # optional
 }
 
 audio_output {
@@ -19,7 +26,7 @@ audio_output {
     encoder		 "vorbis"              # optional, vorbis or lame
     host		 "localhost"
     port		 "8000"
-    quality		 "5.0"                 # do not define if bitrate is defined
+    quality		 "3.0"                 # do not define if bitrate is defined
 #   bitrate		 "128"                 # do not define if quality is defined
     format		 "48000:16:1"
 }
