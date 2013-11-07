@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 
-SELECTED_TRACK=`mpc playlist                       \
-               |nl -s'    ' -nln                   \
-               |dmenu -i -l 10 -nf white -nb black \
-               |cut -d' ' -f1                      \
-               |head -n1                           \
-               `
-exec mpc play $SELECTED_TRACK
+mpc playlist                           \
+  | nl -s'    ' -nln                   \
+  | dmenu -i -l 10 -nf white -nb black \
+  | cut -d' ' -f1                      \
+  | head -n1                           \
+  | xargs mpc play
