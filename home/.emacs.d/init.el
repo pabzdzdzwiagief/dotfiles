@@ -215,12 +215,17 @@
   (setq ident-tabs-mode nil)
   (setq require-final-newline t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'after-init-hook 'enable-zlc)
   (add-hook 'after-init-hook 'side-with-evil))
 
 (defun always-use-horizontal-split ()
   "Make emacs always split horizontally"
   (setq split-height-threshold nil)
   (setq split-width-threshold 0))
+
+(defun enable-zlc ()
+  "Enable zsh-like menu completion"
+  (zlc-mode t))
 
 (defun side-with-evil ()
   "Introduce some VI-like behaviour to emacs"
