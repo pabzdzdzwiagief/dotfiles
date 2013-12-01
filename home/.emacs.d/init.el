@@ -216,6 +216,7 @@
   (setq require-final-newline t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'after-init-hook 'enable-zlc)
+  (add-hook 'after-init-hook 'reuse-buffer-in-dired)
   (add-hook 'after-init-hook 'side-with-evil))
 
 (defun always-use-horizontal-split ()
@@ -226,6 +227,10 @@
 (defun enable-zlc ()
   "Enable zsh-like menu completion"
   (zlc-mode t))
+
+(defun reuse-buffer-in-dired ()
+  "Reuse current `dired' buffer when entering new directory with `a' key"
+  (put 'dired-find-alternate-file 'disabled nil))
 
 (defun side-with-evil ()
   "Introduce some VI-like behaviour to emacs"
