@@ -8,6 +8,7 @@
   (configure-behaviour)
   (set-frame-look)
   (unclutter-emacs-window)
+  (general-programming)
   (clojure-mode-configuration)
   (python-mode-configuration)
   (c-mode-configuration)
@@ -28,26 +29,26 @@
 
 (defun first-run-install ()
   "Install ELPA packages if they are missing"
-  (unless (file-exists-p "~/.emacs.d/elpa")
-    (package-initialize)
-    (package-refresh-contents)
-    (dolist (p '(evil
-		 paredit
-		 rainbow-delimiters
-		 git-commit
-		 markdown-mode
-		 rust-mode
-		 clojure-mode
-		 clojurescript-mode
-		 cljdoc
-		 cljsbuild-mode
-		 google-c-style
-		 auto-complete
-		 auto-complete-clang
-		 ac-nrepl
-		 yasnippet-bundle
-		 xlicense))
-      (package-install p))))
+  (add-hook 'after-init-hook (lambda ()
+			       (unless (file-exists-p "~/.emacs.d/elpa")
+				 (dolist (p '(evil
+					      paredit
+					      rainbow-delimiters
+					      git-commit
+					      markdown-mode
+					      rust-mode
+					      clojure-mode
+					      clojurescript-mode
+					      cljdoc
+					      cljsbuild-mode
+					      google-c-style
+					      auto-complete
+					      auto-complete-clang
+					      ac-nrepl
+					      yasnippet-bundle
+					      xlicense
+					      zlc))
+				   (package-install p))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; path in .emacs.d
@@ -64,29 +65,31 @@
 
 (defun general-programming ()
   "Enable things suitable for any programmning task"
-  (require-programming-modes)
+  (add-hook 'prog-mode-hook 'configure-autocomplete)
+  (add-hook 'prog-mode-hook 'configure-programming-look))
+
+(defun configure-autocomplete ()
+  "Enable AC mode"
+  (require 'auto-complete-config)
   (yas/minor-mode-off)
   (add-completion-source ac-source-yasnippet)
   (setq ac-auto-show-menu t)
   (setq ac-quick-help-delay 0.0)
-  (auto-complete-mode +1)
-  (rainbow-delimiters-mode +1))
-
-(defun require-programming-modes ()
-  "Require programming modes and autocompletion"
-  (require 'auto-complete-config))
+  (auto-complete-mode +1))
 
 (defun add-completion-source (completion-source)
   (setq ac-sources (append (list completion-source) ac-sources)))
+
+(defun configure-programming-look ()
+  "Add colours and behaviour for programming mode"
+  (rainbow-delimiters-mode +1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
 
 (defun clojure-mode-configuration ()
   (add-hook 'clojure-mode-hook 'clojure-mode-utils)
-  (add-hook 'clojure-mode-hook 'general-programming)
   (add-hook 'clojurescript-mode-hook 'clojure-mode-utils)
-  (add-hook 'clojurescript-mode-hook 'general-programming)
   (clojure-nrepl-utils))
 
 (defun clojure-mode-utils ()
@@ -97,7 +100,6 @@
   "Power up nREPL mode"
   (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
   (add-hook 'nrepl-mode-hook 'clojure-mode-utils)
-  (add-hook 'nrepl-mode-hook 'general-programming)
   (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
   (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'nrepl-mode)))
 
@@ -106,11 +108,18 @@
 
 (defun emacs-lisp-mode-configuration ()
   "Enable utils useful for messing with elisp"
-  (add-hook 'emacs-lisp-mode-hook '(lambda ()
-				     (paredit-mode +1)
-				     (eldoc-mode +1)
-				     (ac-emacs-lisp-mode-setup)))
-  (add-hook 'emacs-lisp-mode-hook 'general-programming))
+  (add-hook 'emacs-lisp-mode-hook 'configure-elisp-look)
+  (add-hook 'emacs-lisp-mode-hook 'configure-elisp-autocomplete))
+
+(defun configure-elisp-look ()
+  "Enable paredit and eldoc"
+  (rainbow-delimiters-mode +1)
+  (paredit-mode +1)
+  (eldoc-mode +1))
+
+(defun configure-elisp-autocomplete ()
+  "Enable AC for elisp"
+  (ac-emacs-lisp-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; python mode
@@ -118,8 +127,7 @@
 
 (defun python-mode-configuration ()
   "Configure python mode"
-  (add-hook 'python-mode-hook 'python-ipython)
-  (add-hook 'python-mode-hook 'general-programming))
+  (add-hook 'python-mode-hook 'python-ipython))
 
 (defun python-ipython ()
   "Use ipython3 in python-shell"
@@ -139,13 +147,12 @@
 ;; clang
 
 (defun c-mode-configuration ()
-  (add-hook 'c-mode-common-hook 'linux-c-mode)
-  (add-hook 'c-mode-common-hook 'google-c++-mode)
-  (add-hook 'c-mode-common-hook 'clang-completion)
-  (add-hook 'c-mode-common-hook 'general-programming))
+  (add-hook 'c-mode-hook 'linux-c-mode)
+  (add-hook 'c++-mode-hook 'google-c++-mode)
+  (add-hook 'c-mode-common-hook 'clang-completion))
 
 (defun linux-c-mode ()
-  "linux coding style to complement google style"
+  "linux coding style for pure C"
   (c-set-style "linux"))
 
 (defun google-c++-mode ()
