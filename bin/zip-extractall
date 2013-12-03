@@ -3,8 +3,5 @@
 from sys import argv
 from zipfile import ZipFile
 
-z = ZipFile(argv[1])
-try:
+with ZipFile(argv[1]) as z:
     z.extractall()
-finally:
-    z.close()
