@@ -20,7 +20,7 @@ install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	fc-cache -f -v
 
 $(NEW_HOME)/.local/bin/idea: | $(NEW_HOME)/.local/bin $(NEW_HOME)/.local/share
-	./download-idea.sh
+	sh -c "cd idea && ./download"
 	ln -s $(NEW_HOME)/.local/share/idea/bin/idea.sh $@
 
 $(NEW_HOME)/idea-configuration.jar:
@@ -57,5 +57,5 @@ $(NEW_HOME)/.fonts: | $(NEW_HOME)
 $(NEW_HOME):
 	mkdir -p $@
 
-fonts:
-	./download-fonts.sh
+fonts/%.otf:
+	sh -c "cd fonts && ./download"
