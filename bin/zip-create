@@ -5,12 +5,13 @@ from os import path, walk
 from sys import argv
 from zipfile import ZipFile
 
-archive, to_archive = argv[1], argv[2:]
-with ZipFile(archive, 'w') as zip:
-    for file in to_archive:
-        if path.isdir(file):
-            for base, _, files in walk(file):
-                file_paths = (path.join(base, f) for f in files)
-                map(zip.write, chain([base], file_paths))
-        else:
-            zip.write(file)
+if __name__ == '__main__':
+    archive, to_archive = argv[1], argv[2:]
+    with ZipFile(archive, 'w') as zip:
+        for file in to_archive:
+            if path.isdir(file):
+                for base, _, files in walk(file):
+                    file_paths = (path.join(base, f) for f in files)
+                    map(zip.write, chain([base], file_paths))
+                else:
+                    zip.write(file)

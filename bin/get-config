@@ -7,7 +7,8 @@ if version_info >= (3, 0):
 else:
     from ConfigParser import SafeConfigParser
 
-config_file, section, option = argv[1:4]
-parser = SafeConfigParser()
-parser.read(config_file)
-stdout.write(parser.get(section, option) + '\n')
+if __name__ == '__main__':
+    config_file, section, option = argv[1:4]
+    parser = SafeConfigParser()
+    parser.read(config_file)
+    stdout.write(parser.get(section, option) + '\n')

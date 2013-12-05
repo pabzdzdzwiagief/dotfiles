@@ -3,5 +3,6 @@
 from sys import argv
 from zipfile import ZipFile
 
-with ZipFile(argv[1]) as z:
-    z.extractall()
+if __name__ == '__main__':
+    with ZipFile(argv[1]) as z:
+        z.extractall()
