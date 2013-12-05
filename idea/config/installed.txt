@@ -1,0 +1,6 @@
+com.intellij
+org.intellij.scala
+org.intellij.sbt
+IdeaVIM
+SBT
+net.nicoulaj.idea.markdown

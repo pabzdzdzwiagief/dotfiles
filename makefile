@@ -15,12 +15,16 @@ FONTS_TARGETS = SourceCodePro-Bold \
 install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
          $(HOME_TARGETS:%=$(NEW_HOME)/%) \
          $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
-         $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf)
+         $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) \
+         $(NEW_HOME)/idea-configuration.jar
 	fc-cache -f -v
 
 $(NEW_HOME)/.local/bin/idea: | $(NEW_HOME)/.local/bin $(NEW_HOME)/.local/share
 	./download-idea.sh
 	ln -s $(NEW_HOME)/.local/share/idea/bin/idea.sh $@
+
+$(NEW_HOME)/idea-configuration.jar:
+	sh -c "cd idea/config && ../../bin/zip-create $@ *"
 
 $(NEW_HOME)/.local/bin/%: | $(NEW_HOME)/.local/bin
 	ln -s `bin/relpath bin $(NEW_HOME)/.local/bin`/$* $@
