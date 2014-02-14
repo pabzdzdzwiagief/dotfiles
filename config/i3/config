@@ -54,6 +54,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+q layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
+workspace_layout tabbed
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
