@@ -34,6 +34,8 @@
 				 (dolist (p '(evil
 					      paredit
 					      rainbow-delimiters
+					      fill-column-indicator
+					      column-enforce-mode
 					      git-commit
 					      markdown-mode
 					      rust-mode
@@ -82,7 +84,14 @@
 
 (defun configure-programming-look ()
   "Add colours and behaviour for programming mode"
-  (rainbow-delimiters-mode +1))
+  (rainbow-delimiters-mode +1)
+  (progn
+    (setq fci-rule-column 80)
+    (setq fci-rule-color "gray30")
+    (fci-mode +1))
+  (progn
+    (column-enforce-mode)
+    (80-column-rule)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
