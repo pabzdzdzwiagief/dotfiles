@@ -2,6 +2,7 @@
 username = pabzdzdzwiagief <pabzdzdzwiagief@gmail.com>
 
 [extensions]
+color=
 mq=
 
 # uncomment when using system on which hg cannot find proper location

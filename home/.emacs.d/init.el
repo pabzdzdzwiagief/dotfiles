@@ -195,7 +195,7 @@
 ;; look
 
 (defun unclutter-emacs-window ()
-  "Remove scrollbars, toolbars and such"
+  "Remove scrollbars, toolbars etc."
   (custom-set-variables
    '(color-theme-is-global nil)
    '(inhibit-startup-screen t)
@@ -210,7 +210,9 @@
 (defun set-frame-look ()
   "Set font and theme for emacs frame"
   (add-to-list 'default-frame-alist '(font . "Source Code Pro Semibold-10"))
-  (load-theme 'wombat))
+  (load-theme 'wombat)
+  (set-cursor-color "red")
+  (set-face-underline-p 'highlight nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
