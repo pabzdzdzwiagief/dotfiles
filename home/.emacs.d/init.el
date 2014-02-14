@@ -37,9 +37,8 @@
 					      git-commit
 					      markdown-mode
 					      rust-mode
-					      clojure-mode
+					      cider
 					      clojurescript-mode
-					      cljdoc
 					      cljsbuild-mode
 					      google-c-style
 					      auto-complete
@@ -75,6 +74,7 @@
   (add-completion-source ac-source-yasnippet)
   (setq ac-auto-show-menu t)
   (setq ac-quick-help-delay 0.0)
+  (setq completion-at-point-functions '(auto-complete))
   (auto-complete-mode +1))
 
 (defun add-completion-source (completion-source)
@@ -94,14 +94,17 @@
 
 (defun clojure-mode-utils ()
   "Enable several utilities useful in clojure-mode"
+  (rainbow-delimiters-mode +1)
   (paredit-mode +1))
 
 (defun clojure-nrepl-utils ()
-  "Power up nREPL mode"
-  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-  (add-hook 'nrepl-mode-hook 'clojure-mode-utils)
-  (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-  (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'nrepl-mode)))
+  "Power nREPL mode up"
+  (add-hook 'cider-mode-hook 'ac-nrepl-setup)
+  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+  (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+  (add-hook 'cider-repl-mode-hook 'clojure-mode-utils)
+  (add-hook 'cider-repl-mode-hook '(lambda () (run-hooks 'prog-mode-hook)))
+  (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'cider-repl-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs-lisp
