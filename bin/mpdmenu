@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-mpc playlist                           \
-  | nl -s'    ' -nln                   \
-  | dmenu -i -l 10 -nf white -nb black \
-  | cut -d' ' -f1                      \
-  | head -n1                           \
+mpc playlist                                            \
+  | nl -s'    ' -nln                                    \
+  | dmenu -i -l 10 -nf white -nb black -sb 'slate grey' \
+  | cut -d' ' -f1                                       \
+  | head -n1                                            \
   | xargs mpc play

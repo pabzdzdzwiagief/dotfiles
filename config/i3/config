@@ -91,6 +91,9 @@ bar {
         status_command i3status
 	position top
 	mode hide
+	colors {
+		focused_workspace #ffffff #708090
+	}
 }
 
 new_window none
