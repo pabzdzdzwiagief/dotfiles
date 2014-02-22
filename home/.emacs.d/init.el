@@ -72,7 +72,8 @@
 (defun general-programming ()
   "Enable things suitable for any programmning task"
   (add-hook 'prog-mode-hook 'configure-autocomplete)
-  (add-hook 'prog-mode-hook 'configure-programming-look))
+  (add-hook 'prog-mode-hook 'configure-programming-look)
+  (add-hook 'prog-mode-hook 'guess-indentation-type))
 
 (defun configure-autocomplete ()
   "Enable AC mode"
@@ -98,6 +99,13 @@
     (column-enforce-mode)
     (80-column-rule)))
 
+(defun guess-indentation-type ()
+  "Tries to guess whether tabs should be used in a file"
+  (setq indent-tabs-mode (> (how-many "^\t+.*$") (how-many "^ .*$")))
+  (add-hook 'before-save-hook (lambda ()
+                                (when indent-tabs-mode
+                                  (untabify (point-min) (point-max))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
 
@@ -117,7 +125,7 @@
   (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
   (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
   (add-hook 'cider-repl-mode-hook 'clojure-mode-utils)
-  (add-hook 'cider-repl-mode-hook '(lambda () (run-hooks 'prog-mode-hook)))
+  (add-hook 'cider-repl-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
   (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'cider-repl-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
