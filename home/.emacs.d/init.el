@@ -247,9 +247,9 @@
 (defun configure-behaviour ()
   "Configure certain aspects of emacs' behaviour"
   (setq scroll-step 1)
-  (setq default-tab-width 8)
-  (setq ident-tabs-mode nil)
-  (setq require-final-newline t)
+  (setq-default tab-width 8)
+  (setq-default ident-tabs-mode nil)
+  (setq-default require-final-newline t)
   (setq-default truncate-lines t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'after-init-hook 'enable-zlc)
