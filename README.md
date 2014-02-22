@@ -1,16 +1,12 @@
 dotfiles
 ========
 
-pabżdźdźwiągief's configuration files and scripts.
-
-Programs used:
+Scripts and configuration files for:
 - emacs
-- nitrogen
 - parcellite
-- dmenu
 - i3
-- mpd
 - urxvt
+- mpd
 - tmux
 - zsh
 
@@ -18,7 +14,8 @@ installation
 ------------
 
 Clone this repo somewhere (e.g. in `~/.config`) and run `make install` to
-symlink its contents inside the `$HOME` directory.
+create symlinks inside the `$HOME` directory. Run `chsh -s $(which zsh)` to set
+`zsh` as your default shell.
 
 Installation requirements:
 - GNU Make
