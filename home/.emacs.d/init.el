@@ -1,9 +1,10 @@
 (defun init ()
   "Perform steps defined for emacs configuration"
+  (when (first-run-p)
+      (first-run-install))
   (autosave-to-home)
   (extend-load-path)
   (elpa-set-repos)
-  (first-run-install)
   (use-utf-8)
   (configure-behaviour)
   (set-frame-look)
@@ -27,29 +28,33 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup ELPA packages
 
+(defun first-run-p ()
+  "Checks if this is a fresh install"
+  (not (file-exists-p "~/.emacs.d/elpa")))
+
 (defun first-run-install ()
-  "Install ELPA packages if they are missing"
-  (add-hook 'after-init-hook (lambda ()
-			       (unless (file-exists-p "~/.emacs.d/elpa")
-				 (dolist (p '(evil
-					      paredit
-					      rainbow-delimiters
-					      fill-column-indicator
-					      column-enforce-mode
-					      git-commit
-					      markdown-mode
-					      rust-mode
-					      cider
-					      clojurescript-mode
-					      cljsbuild-mode
-					      google-c-style
-					      auto-complete
-					      auto-complete-clang
-					      ac-nrepl
-					      yasnippet-bundle
-					      xlicense
-					      zlc))
-				   (package-install p))))))
+  "Install non-standard ELPA packages"
+  (package-initialize)
+  (package-refresh-contents)
+  (dolist (p '(evil
+               paredit
+               rainbow-delimiters
+               fill-column-indicator
+               column-enforce-mode
+               git-commit
+               markdown-mode
+               rust-mode
+               cider
+               clojurescript-mode
+               cljsbuild-mode
+               google-c-style
+               auto-complete
+               auto-complete-clang
+               ac-nrepl
+               yasnippet-bundle
+               xlicense
+               zlc))
+    (package-install p)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; path in .emacs.d
