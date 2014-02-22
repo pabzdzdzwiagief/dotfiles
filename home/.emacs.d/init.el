@@ -1,10 +1,10 @@
 (defun init ()
   "Perform steps defined for emacs configuration"
+  (elpa-set-repos)
   (when (first-run-p)
       (first-run-install))
   (autosave-to-home)
   (extend-load-path)
-  (elpa-set-repos)
   (use-utf-8)
   (configure-behaviour)
   (set-frame-look)
