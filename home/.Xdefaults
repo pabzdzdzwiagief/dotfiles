@@ -1,4 +1,4 @@
-!--< fonty >--!
+!--< fonts >--!
 Xft.antialias:          true
 Xft.hinting:            true
 Xft.hintstyle:          hintsfull
@@ -17,15 +17,15 @@ urxvt.internalBorder:   1
 urxvt.cursorBlink:      false
 urxvt.perl-ext-common:  default
 
-!--< urxvt:kolorki >--!
-urxvt.transparent:	false
-urxvt.depth:		32
-urxvt.background:	rgba:1111/1111/1111/aaaa
+!--< urxvt:colours >--!
+urxvt.transparent:      false
+urxvt.depth:            32
+urxvt.background:       rgba:4444/4444/4444/aaaa
 urxvt.foreground:       white
-urxvt.buffered: 	true
-urxvt.shading:		33
-urxvt.fadeColor:	grey
-urxvt.fading:		2%
+urxvt.buffered:         true
+urxvt.shading:          33
+urxvt.fadeColor:        grey
+urxvt.fading:           2%
 urxvt.cursorColor:      red
 urxvt.cursorColor2:     black
 urxvt.colorBD:          #ffffff
