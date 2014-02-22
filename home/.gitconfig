@@ -16,6 +16,7 @@ status = auto
 [alias]
 ci = commit
 di = diff --color-words
+dic = diff --color-words --cached
 st = status -uall
 
 # local overrides
