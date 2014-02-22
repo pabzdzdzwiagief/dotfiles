@@ -94,10 +94,8 @@
   (progn
     (setq fci-rule-column 80)
     (setq fci-rule-color "gray30")
-    (fci-mode +1))
-  (progn
-    (column-enforce-mode)
-    (80-column-rule)))
+    (fci-mode -1))
+  (column-enforce-mode))
 
 (defun guess-indentation-type ()
   "Tries to guess whether tabs should be used in a file"
@@ -252,6 +250,7 @@
   (setq default-tab-width 8)
   (setq ident-tabs-mode nil)
   (setq require-final-newline t)
+  (setq-default truncate-lines t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'after-init-hook 'enable-zlc)
   (add-hook 'after-init-hook 'reuse-buffer-in-dired)
