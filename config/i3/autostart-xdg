@@ -2,7 +2,8 @@
 
 for program in "gnome-settings-daemon" \
                "gnome-keyring-pkcs11"  \
-               "nm-applet"
+               "nm-applet"             \
+               "bluetooth-applet"
 do
     run-desktop "/etc/xdg/autostart/$program.desktop" &
 done
