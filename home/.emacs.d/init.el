@@ -189,6 +189,10 @@
 (defun clang-completion ()
   "C/C++ code completion using clang compiler"
   (require 'auto-complete-clang)
+  (defun clang-completion-add-to-include-path (path)
+    "Add `path' as a clang's `-I<path>' parameter"
+    (interactive "DPath: ")
+    (setq ac-clang-flags (cons (concat "-I" path) ac-clang-flags)))
   (setq ac-sources '(ac-source-yasnippet ac-source-clang)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
