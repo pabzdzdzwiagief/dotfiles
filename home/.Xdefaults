@@ -15,7 +15,8 @@ urxvt.xftAntialias:     true
 urxvt.jumpScroll:       true
 urxvt.internalBorder:   1
 urxvt.cursorBlink:      false
-urxvt.perl-ext-common:  default
+urxvt.perl-ext:
+urxvt.perl-ext-common:
 
 !--< urxvt:colours >--!
 urxvt.transparent:      false
