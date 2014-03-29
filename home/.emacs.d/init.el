@@ -37,6 +37,7 @@
   (package-initialize)
   (package-refresh-contents)
   (dolist (p '(evil
+               evil-paredit
                paredit
                rainbow-delimiters
                fill-column-indicator
@@ -272,7 +273,9 @@
 (defun side-with-evil ()
   "Introduce some VI-like behaviour to emacs"
   (setq evil-default-cursor t)
-  (evil-mode t))
+  (evil-mode t)
+  (eval-after-load "paredit" '(require 'evil-paredit))
+  (add-hook 'paredit-mode-hook (lambda () (evil-paredit-mode +1))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Go!
