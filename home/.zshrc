@@ -6,6 +6,7 @@ bindkey -e
 eval `dircolors -b`
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
+setopt histignoredups
 zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
