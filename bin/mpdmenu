@@ -5,4 +5,4 @@ mpc playlist                                            \
   | dmenu -i -l 10 -nf white -nb black -sb 'slate grey' \
   | cut -d' ' -f1                                       \
   | head -n1                                            \
-  | xargs mpc play
+  | xargs -i mpc play {}
