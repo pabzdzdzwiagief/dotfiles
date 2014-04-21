@@ -237,10 +237,12 @@
   (global-hl-line-mode t))
 
 (defun set-frame-look ()
-  "Set font and theme for emacs frame"
-  (add-to-list 'default-frame-alist '(font . "Source Code Pro Semibold-10"))
+  "Set font and theme for emacs frames"
   (load-theme 'wombat)
-  (set-cursor-color "red")
+  (add-to-list 'default-frame-alist '(font . "Source Code Pro Semibold-10"))
+  (add-to-list 'default-frame-alist '(cursor-color . "red"))
+  (set-face-background 'highlight "#300000")
+  (set-face-foreground 'highlight nil)
   (set-face-underline-p 'highlight nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
