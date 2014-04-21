@@ -38,6 +38,7 @@
   (package-refresh-contents)
   (dolist (p '(evil
                evil-paredit
+               expand-region
                paredit
                rainbow-delimiters
                fill-column-indicator
@@ -255,7 +256,12 @@
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'after-init-hook 'enable-zlc)
   (add-hook 'after-init-hook 'reuse-buffer-in-dired)
-  (add-hook 'after-init-hook 'side-with-evil))
+  (add-hook 'after-init-hook 'side-with-evil)
+  (configure-key-bindings))
+
+(defun configure-key-bindings ()
+  "Assign additional key bindings"
+  (global-set-key (kbd "C-=") 'er/expand-region))
 
 (defun always-use-horizontal-split ()
   "Make emacs always split horizontally"
