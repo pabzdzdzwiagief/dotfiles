@@ -214,11 +214,11 @@
 
 (defun use-utf-8 ()
   "Make emacs use UTF-8"
-  (setq locale-coding-system 'utf-8)
-  (setq terminal-coding-system 'utf-8)
-  (setq keyboard-coding-system 'utf-8)
-  (setq selection-coding-system 'utf-8)
-  (setq prefer-coding-system 'utf-8))
+  (setq locale-coding-system 'utf-8-unix)
+  (setq terminal-coding-system 'utf-8-unix)
+  (setq keyboard-coding-system 'utf-8-unix)
+  (setq selection-coding-system 'utf-8-unix)
+  (setq prefer-coding-system 'utf-8-unix))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; look
