@@ -39,20 +39,18 @@
   (dolist (p '(evil
                evil-paredit
                expand-region
-               paredit
                rainbow-delimiters
                fill-column-indicator
                column-enforce-mode
                git-commit
                markdown-mode
                rust-mode
-               cider
-               clojurescript-mode
-               cljsbuild-mode
                google-c-style
-               auto-complete
-               auto-complete-clang
+               cider
+               clojure-test-mode
+               cljsbuild-mode
                ac-nrepl
+               auto-complete-clang
                yasnippet-bundle
                xlicense
                zlc))
