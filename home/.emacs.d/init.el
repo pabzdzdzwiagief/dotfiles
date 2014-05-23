@@ -83,7 +83,7 @@
   (yas/minor-mode-off)
   (add-completion-source ac-source-yasnippet)
   (setq ac-auto-show-menu t)
-  (setq ac-quick-help-delay 0.0)
+  (setq ac-quick-help-delay 0.5)
   (setq completion-at-point-functions '(auto-complete))
   (auto-complete-mode +1))
 
