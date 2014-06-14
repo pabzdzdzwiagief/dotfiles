@@ -2,7 +2,7 @@
   "Perform steps defined for emacs configuration"
   (elpa-set-repos)
   (when (first-run-p)
-      (first-run-install))
+    (first-run-install))
   (autosave-to-home)
   (extend-load-path)
   (use-utf-8)
@@ -237,11 +237,26 @@
 (defun set-frame-look ()
   "Set font and theme for emacs frames"
   (load-theme 'wombat)
-  (add-to-list 'default-frame-alist '(font . "Source Code Pro Semibold-10"))
+  (let ((font-of-choice (first-available-font '("Source Code Pro Semibold"
+                                                "Inconsolata"
+                                                "DejaVu Sans Mono"
+                                                "Monaco"
+                                                "Consolas"
+                                                "Courier New"))))
+    (when font-of-choice
+      (let* ((font-name (font-get font-of-choice :name))
+             (font-size 10)
+             (font (format "%s-%i" font-name font-size)))
+        (add-to-list 'default-frame-alist `(font . ,font)))))
   (add-to-list 'default-frame-alist '(cursor-color . "red"))
   (set-face-background 'highlight "#300000")
   (set-face-foreground 'highlight nil)
   (set-face-underline-p 'highlight nil))
+
+(defun first-available-font (font-name-list)
+  "Returns first available font from the list"
+  (let ((font-by-name (lambda (name) (find-font (font-spec :name name)))))
+    (car (delq nil (mapcar font-by-name font-name-list)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
