@@ -237,15 +237,14 @@
 (defun set-frame-look ()
   "Set font and theme for emacs frames"
   (load-theme 'wombat)
-  (let ((font-of-choice (first-available-font '("Source Code Pro Semibold"
-                                                "Inconsolata"
-                                                "DejaVu Sans Mono"
-                                                "Monaco"
-                                                "Consolas"
-                                                "Courier New"))))
-    (when font-of-choice
-      (let* ((font-name (font-get font-of-choice :name))
-             (font-size 10)
+  (let ((font-name (first-available-font '("Source Code Pro Semibold"
+                                           "Inconsolata"
+                                           "DejaVu Sans Mono"
+                                           "Monaco"
+                                           "Consolas"
+                                           "Courier New"))))
+    (when font-name
+      (let* ((font-size 10)
              (font (format "%s-%i" font-name font-size)))
         (add-to-list 'default-frame-alist `(font . ,font)))))
   (add-to-list 'default-frame-alist '(cursor-color . "red"))
@@ -255,8 +254,9 @@
 
 (defun first-available-font (font-name-list)
   "Returns first available font from the list"
-  (let ((font-by-name (lambda (name) (find-font (font-spec :name name)))))
-    (car (delq nil (mapcar font-by-name font-name-list)))))
+  (let ((font-available-p (lambda (name)
+			    (if (find-font (font-spec :name name)) name))))
+    (car (delq nil (mapcar font-available-p font-name-list)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; behaviour
