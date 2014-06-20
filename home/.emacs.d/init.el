@@ -1,19 +1,23 @@
 (defun init ()
   "Perform steps defined for emacs configuration"
+  (init-basic)
+  (init-coding)
+  (init-clojure)
+  (init-python)
+  (init-c)
+  (init-elisp)
+  (init-rust))
+
+(defun init-basic ()
+  "Setup some very basic functionality"
   (elpa-set-repos)
-  (when (first-run-p)
-    (first-run-install))
+  (expect-packages '(evil evil-paredit expand-region markdown-mode zlc))
   (autosave-to-home)
   (extend-load-path)
   (use-utf-8)
   (configure-behaviour)
   (set-frame-look)
-  (unclutter-emacs-window)
-  (general-programming)
-  (clojure-mode-configuration)
-  (python-mode-configuration)
-  (c-mode-configuration)
-  (emacs-lisp-mode-configuration))
+  (unclutter-emacs-window))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Specify ELPA repositories
@@ -28,33 +32,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup ELPA packages
 
+(defun expect-packages (expected)
+  (package-initialize)
+  (when (first-run-p)
+    (package-refresh-contents))
+  (dolist (package expected)
+    (when (not (package-installed-p package))
+      (package-install package))))
+
 (defun first-run-p ()
   "Checks if this is a fresh install"
   (not (file-exists-p "~/.emacs.d/elpa")))
-
-(defun first-run-install ()
-  "Install non-standard ELPA packages"
-  (package-initialize)
-  (package-refresh-contents)
-  (dolist (p '(evil
-               evil-paredit
-               expand-region
-               rainbow-delimiters
-               fill-column-indicator
-               column-enforce-mode
-               git-commit
-               markdown-mode
-               rust-mode
-               google-c-style
-               cider
-               clojure-test-mode
-               cljsbuild-mode
-               ac-nrepl
-               auto-complete-clang
-               yasnippet-bundle
-               xlicense
-               zlc))
-    (package-install p)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; path in .emacs.d
@@ -69,8 +57,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; general programming
 
-(defun general-programming ()
+(defun init-coding ()
   "Enable things suitable for any programmning task"
+  (expect-packages '(git-commit fill-column-indicator column-enforce-mode
+                     yasnippet-bundle auto-complete xlicense))
   (add-hook 'prog-mode-hook 'configure-autocomplete)
   (add-hook 'prog-mode-hook 'configure-programming-look)
   (add-hook 'prog-mode-hook 'guess-indentation-type))
@@ -90,7 +80,6 @@
 
 (defun configure-programming-look ()
   "Add colours and behaviour for programming mode"
-  (rainbow-delimiters-mode +1)
   (progn
     (setq fci-rule-column 80)
     (setq fci-rule-color "gray30")
@@ -108,49 +97,40 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
 
-(defun clojure-mode-configuration ()
-  (add-hook 'clojure-mode-hook 'clojure-mode-utils)
-  (add-hook 'clojurescript-mode-hook 'clojure-mode-utils)
-  (clojure-nrepl-utils))
-
-(defun clojure-mode-utils ()
-  "Enable several utilities useful in clojure-mode"
-  (rainbow-delimiters-mode +1)
-  (paredit-mode +1))
-
-(defun clojure-nrepl-utils ()
-  "Power nREPL mode up"
+(defun init-clojure ()
+  (expect-packages '(paredit evil-paredit expand-region rainbow-delimiters
+                     cider cljsbuild-mode ac-nrepl))
+  (require 'rainbow-delimiters)
+  (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'cider-repl-mode))
+  (eval-after-load "paredit" '(require 'evil-paredit))
+  (add-hook 'paredit-mode-hook (lambda () (evil-paredit-mode +1)))
+  (add-hook 'clojure-mode-hook 'paredit-mode)
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'clojurescript-mode-hook (lambda () (run-hooks 'clojure-mode-hook)))
   (add-hook 'cider-mode-hook 'ac-nrepl-setup)
   (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
   (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-  (add-hook 'cider-repl-mode-hook 'clojure-mode-utils)
-  (add-hook 'cider-repl-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
-  (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'cider-repl-mode)))
+  (add-hook 'cider-repl-mode-hook (lambda () (run-hooks 'clojure-mode-hook)))
+  (add-hook 'cider-repl-mode-hook (lambda () (run-hooks 'prog-mode-hook))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs-lisp
 
-(defun emacs-lisp-mode-configuration ()
-  "Enable utils useful for messing with elisp"
-  (add-hook 'emacs-lisp-mode-hook 'configure-elisp-look)
-  (add-hook 'emacs-lisp-mode-hook 'configure-elisp-autocomplete))
-
-(defun configure-elisp-look ()
-  "Enable paredit and eldoc"
-  (rainbow-delimiters-mode +1)
-  (paredit-mode +1)
-  (eldoc-mode +1))
-
-(defun configure-elisp-autocomplete ()
-  "Enable AC for elisp"
-  (ac-emacs-lisp-mode-setup))
+(defun init-elisp ()
+  (expect-packages '(paredit evil-paredit expand-region rainbow-delimiters))
+  (require 'rainbow-delimiters)
+  (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'cider-repl-mode))
+  (eval-after-load "paredit" '(require 'evil-paredit))
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; python mode
 ;; source: http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
 
-(defun python-mode-configuration ()
-  "Configure python mode"
+(defun init-python ()
   (add-hook 'python-mode-hook 'python-ipython))
 
 (defun python-ipython ()
@@ -170,29 +150,28 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clang
 
-(defun c-mode-configuration ()
-  (add-hook 'c-mode-hook 'linux-c-mode)
-  (add-hook 'c++-mode-hook 'google-c++-mode)
-  (add-hook 'c-mode-common-hook 'clang-completion))
-
-(defun linux-c-mode ()
-  "linux coding style for pure C"
-  (c-set-style "linux"))
-
-(defun google-c++-mode ()
-  "C++ mode with Goole coding style imposed"
+(defun init-c ()
+  (expect-packages '(google-c-style auto-complete-clang))
+  (require 'auto-complete-clang)
   (require 'google-c-style)
-  (google-set-c-style)
-  (google-make-newline-indent))
+  (add-hook 'c-mode-hook (lambda () (c-set-style "linux")))
+  (add-hook 'c++-mode-hook 'google-set-c-style)
+  (add-hook 'c++-mode-hook 'google-make-newline-indent)
+  (add-hook 'c-mode-common-hook 'clang-completion))
 
 (defun clang-completion ()
   "C/C++ code completion using clang compiler"
-  (require 'auto-complete-clang)
   (defun clang-completion-add-to-include-path (path)
     "Add `path' as a clang's `-I<path>' parameter"
     (interactive "DPath: ")
     (setq ac-clang-flags (cons (concat "-I" path) ac-clang-flags)))
   (setq ac-sources '(ac-source-yasnippet ac-source-clang)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; rust
+
+(defun init-rust ()
+  (expect-packages '(rust-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; autosave
@@ -256,7 +235,7 @@
 (defun first-available-font (font-name-list)
   "Returns first available font from the list"
   (let ((font-available-p (lambda (name)
-			    (if (find-font (font-spec :name name)) name))))
+                            (if (find-font (font-spec :name name)) name))))
     (car (delq nil (mapcar font-available-p font-name-list)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -295,9 +274,7 @@
 (defun side-with-evil ()
   "Introduce some VI-like behaviour to emacs"
   (setq evil-default-cursor t)
-  (evil-mode t)
-  (eval-after-load "paredit" '(require 'evil-paredit))
-  (add-hook 'paredit-mode-hook (lambda () (evil-paredit-mode +1))))
+  (evil-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Go!
