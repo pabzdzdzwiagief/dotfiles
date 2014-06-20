@@ -144,7 +144,7 @@
   "Assign additional key bindings"
   (global-set-key (kbd "C-=") 'er/expand-region)
   (global-set-key (kbd "C-x r C-f") 'recentf-open-files)
-  (global-set-key (kbd "C-x n C-f") 'make-frame-command))
+  (global-set-key (kbd "C-x n C-f") 'find-file-other-frame))
 
 (defun always-use-horizontal-split ()
   "Make emacs always split horizontally"
@@ -171,13 +171,13 @@
   "Enable things suitable for any programmning task"
   (expect-packages '(git-commit fill-column-indicator column-enforce-mode
                      yasnippet-bundle auto-complete xlicense))
+  (require 'auto-complete-config)
   (add-hook 'prog-mode-hook 'configure-autocomplete)
   (add-hook 'prog-mode-hook 'configure-programming-look)
   (add-hook 'prog-mode-hook 'guess-indentation-type))
 
 (defun configure-autocomplete ()
   "Enable AC mode"
-  (require 'auto-complete-config)
   (yas/minor-mode-off)
   (add-completion-source ac-source-yasnippet)
   (setq ac-auto-show-menu t)
