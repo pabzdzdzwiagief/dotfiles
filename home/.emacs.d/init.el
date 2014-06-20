@@ -112,9 +112,10 @@
              (font (format "%s-%i" font-name font-size)))
         (add-to-list 'default-frame-alist `(font . ,font)))))
   (add-to-list 'default-frame-alist '(cursor-color . "red"))
-  (set-face-background 'highlight "#300000")
-  (set-face-foreground 'highlight nil)
-  (set-face-underline-p 'highlight nil))
+  (when window-system
+    (set-face-background 'highlight "#300000")
+    (set-face-foreground 'highlight nil)
+    (set-face-underline-p 'highlight nil)))
 
 (defun first-available-font (font-name-list)
   "Returns first available font from the list"
