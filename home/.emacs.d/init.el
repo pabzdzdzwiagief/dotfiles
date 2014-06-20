@@ -127,12 +127,14 @@
 
 (defun configure-behaviour ()
   "Configure certain aspects of emacs' behaviour"
+  (require 'recentf)
   (setq scroll-step 1)
   (setq-default tab-width 8)
   (setq-default ident-tabs-mode nil)
   (setq-default require-final-newline t)
   (setq-default truncate-lines t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'after-init-hook 'recentf-mode)
   (add-hook 'after-init-hook 'enable-zlc)
   (add-hook 'after-init-hook 'reuse-buffer-in-dired)
   (add-hook 'after-init-hook 'side-with-evil)
@@ -140,7 +142,9 @@
 
 (defun configure-key-bindings ()
   "Assign additional key bindings"
-  (global-set-key (kbd "C-=") 'er/expand-region))
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  (global-set-key (kbd "C-x r C-f") 'recentf-open-files)
+  (global-set-key (kbd "C-x n C-f") 'make-frame-command))
 
 (defun always-use-horizontal-split ()
   "Make emacs always split horizontally"
