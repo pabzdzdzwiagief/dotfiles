@@ -101,7 +101,8 @@
   "Tries to guess whether tabs should be used in a file"
   (setq indent-tabs-mode (> (how-many "^\t+.*$") (how-many "^ .*$")))
   (add-hook 'before-save-hook (lambda ()
-                                (when indent-tabs-mode
+                                (if indent-tabs-mode
+                                  (tabify (point-min) (point-max))
                                   (untabify (point-min) (point-max))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
