@@ -171,11 +171,21 @@
 (defun init-coding ()
   "Enable things suitable for any programmning task"
   (expect-packages '(git-commit fill-column-indicator column-enforce-mode
-                     yasnippet-bundle auto-complete xlicense))
+                     yasnippet-bundle auto-complete xlicense projectile
+                     flx-ido helm-projectile))
   (require 'auto-complete-config)
+  (require 'flx-ido)
+  (add-hook 'prog-mode-hook 'flx-ido-mode)
+  (add-hook 'prog-mode-hook 'projectile-mode)
   (add-hook 'prog-mode-hook 'configure-autocomplete)
   (add-hook 'prog-mode-hook 'configure-programming-look)
-  (add-hook 'prog-mode-hook 'guess-indentation-type))
+  (add-hook 'prog-mode-hook 'guess-indentation-type)
+  (global-set-key (kbd "C-c C-h") 'helm-projectile)
+  (global-set-key (kbd "C-c N") 'projectile-find-file)
+  (global-set-key (kbd "C-c D") 'projectile-dired)
+  (global-set-key (kbd "C-c F") 'projectile-grep)
+  (global-set-key (kbd "C-c H") 'projectile-replace)
+  (global-set-key (kbd "C-c S") 'projectile-save-project-buffers))
 
 (defun configure-autocomplete ()
   "Enable AC mode"
