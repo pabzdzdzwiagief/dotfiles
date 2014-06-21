@@ -14,7 +14,7 @@
 (defun init-basic ()
   "Setup some very basic functionality"
   (elpa-set-repos)
-  (expect-packages '(evil evil-paredit expand-region markdown-mode zlc))
+  (expect-packages '(evil evil-paredit expand-region markdown-mode))
   (autosave-to-home)
   (extend-load-path)
   (use-utf-8)
@@ -136,13 +136,9 @@
   (setq-default truncate-lines t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'after-init-hook 'recentf-mode)
-  (add-hook 'after-init-hook 'enable-zlc)
+  (add-hook 'after-init-hook 'ido-mode)
   (add-hook 'after-init-hook 'reuse-buffer-in-dired)
   (add-hook 'after-init-hook 'side-with-evil)
-  (configure-key-bindings))
-
-(defun configure-key-bindings ()
-  "Assign additional key bindings"
   (global-set-key (kbd "C-=") 'er/expand-region)
   (global-set-key (kbd "C-x r C-f") 'recentf-open-files)
   (global-set-key (kbd "C-x n C-f") 'find-file-other-frame))
@@ -151,10 +147,6 @@
   "Make emacs always split horizontally"
   (setq split-height-threshold nil)
   (setq split-width-threshold 0))
-
-(defun enable-zlc ()
-  "Enable zsh-like menu completion"
-  (zlc-mode t))
 
 (defun reuse-buffer-in-dired ()
   "Reuse current `dired' buffer when entering new directory with `a' key"
