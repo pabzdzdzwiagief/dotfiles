@@ -139,6 +139,7 @@
   (add-hook 'after-init-hook 'ido-mode)
   (add-hook 'after-init-hook 'reuse-buffer-in-dired)
   (add-hook 'after-init-hook 'side-with-evil)
+  (add-hook 'emacs-startup-hook 'replace-scratch-buffer)
   (global-set-key (kbd "C-=") 'er/expand-region)
   (global-set-key (kbd "C-x r C-f") 'recentf-open-files)
   (global-set-key (kbd "C-x n C-f") 'find-file-other-frame))
@@ -156,6 +157,11 @@
   "Introduce some VI-like behaviour to emacs"
   (setq evil-default-cursor t)
   (evil-mode t))
+
+(defun replace-scratch-buffer ()
+  "Use `recentf' as a start buffer instead of `*scratch*'"
+  (kill-buffer "*scratch*")
+  (recentf-open-files))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; general programming
