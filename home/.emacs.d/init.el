@@ -115,7 +115,7 @@
   (when window-system
     (set-face-background 'highlight "#300000")
     (set-face-foreground 'highlight nil)
-    (set-face-underline-p 'highlight nil)))
+    (set-face-underline 'highlight nil)))
 
 (defun first-available-font (font-name-list)
   "Returns first available font from the list"
