@@ -218,7 +218,7 @@
 
 (defun init-clojure ()
   (expect-packages '(paredit evil-paredit expand-region rainbow-delimiters
-                     cider cljsbuild-mode ac-nrepl))
+                     cider cljsbuild-mode ac-cider))
   (require 'rainbow-delimiters)
   (eval-after-load "auto-complete" '(add-to-list 'ac-modes 'cider-repl-mode))
   (eval-after-load "paredit" '(require 'evil-paredit))
@@ -226,9 +226,9 @@
   (add-hook 'clojure-mode-hook 'paredit-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'clojurescript-mode-hook (lambda () (run-hooks 'clojure-mode-hook)))
-  (add-hook 'cider-mode-hook 'ac-nrepl-setup)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
   (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-  (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
   (add-hook 'cider-repl-mode-hook (lambda () (run-hooks 'clojure-mode-hook)))
   (add-hook 'cider-repl-mode-hook (lambda () (run-hooks 'prog-mode-hook))))
 
