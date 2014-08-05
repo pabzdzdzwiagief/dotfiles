@@ -170,11 +170,12 @@
   "Enable things suitable for any programmning task"
   (expect-packages '(git-commit fill-column-indicator column-enforce-mode
                      yasnippet-bundle auto-complete xlicense projectile
-                     flx-ido helm-projectile))
+                     flx-ido helm-projectile flycheck))
   (require 'auto-complete-config)
   (require 'flx-ido)
   (add-hook 'prog-mode-hook 'flx-ido-mode)
   (add-hook 'prog-mode-hook 'projectile-mode)
+  (add-hook 'prog-mode-hook 'flycheck-mode)
   (add-hook 'prog-mode-hook 'configure-autocomplete)
   (add-hook 'prog-mode-hook 'configure-programming-look)
   (add-hook 'prog-mode-hook 'guess-indentation-type)
@@ -198,7 +199,7 @@
   (setq ac-sources (append (list completion-source) ac-sources)))
 
 (defun configure-programming-look ()
-  "Add colours and behaviour for programming mode"
+  "Colours and behaviour for programming mode"
   (progn
     (setq fci-rule-column 80)
     (setq fci-rule-color "gray30")
