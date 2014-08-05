@@ -208,11 +208,13 @@
 
 (defun guess-indentation-type ()
   "Tries to guess whether tabs should be used in a file"
-  (setq indent-tabs-mode (> (how-many "^\t+.*$") (how-many "^ .*$")))
-  (add-hook 'before-save-hook (lambda ()
-                                (if indent-tabs-mode
-                                  (tabify (point-min) (point-max))
-                                  (untabify (point-min) (point-max))))))
+  (let ((prefer-tabs (> (how-many "^\t+.*$") (how-many "^ .*$"))))
+    (setq indent-tabs-mode prefer-tabs)
+    (if prefer-tabs
+        (add-hook 'before-save-hook (lambda ()
+                                      (tabify (point-min) (point-max))))
+      (add-hook 'before-save-hook (lambda ()
+                                    (untabify (point-min) (point-max)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
