@@ -14,7 +14,7 @@
 (defun init-basic ()
   "Setup some very basic functionality"
   (elpa-set-repos)
-  (expect-packages '(evil evil-paredit expand-region markdown-mode))
+  (expect-packages '(evil evil-paredit expand-region markdown-mode vlf))
   (autosave-to-home)
   (extend-load-path)
   (use-utf-8)
@@ -129,6 +129,9 @@
 (defun configure-behaviour ()
   "Configure certain aspects of emacs' behaviour"
   (require 'recentf)
+  (require 'vlf-integrate)
+  (custom-set-variables
+   '(vlf-application 'dont-ask))
   (setq scroll-step 1)
   (setq-default tab-width 8)
   (setq-default ident-tabs-mode nil)
