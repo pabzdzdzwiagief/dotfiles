@@ -60,6 +60,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; autosave
 ;; trick - http://snarfed.org/gnu_emacs_backup_files
+;; backup files and saveplace - http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/
 
 (defun autosave-to-home ()
   "Make emacs put autosave files (ie #foo#) and backup files (ie foo~) in
@@ -68,7 +69,11 @@
    '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
    '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
   (make-directory "~/.emacs.d/autosaves/" t)
-  (make-directory "~/.emacs.d/backups/" t))
+  (make-directory "~/.emacs.d/backups/" t)
+  (setq make-backup-files nil)
+  (setq save-place-file "~/.emacs.d/saveplace")
+  (when (not (file-exists-p save-place-file))
+    (write-region "" nil save-place-file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; utf-8
@@ -129,6 +134,7 @@
 (defun configure-behaviour ()
   "Configure certain aspects of emacs' behaviour"
   (require 'recentf)
+  (require 'saveplace)
   (require 'vlf-integrate)
   (custom-set-variables
    '(vlf-application 'dont-ask))
@@ -137,6 +143,7 @@
   (setq-default ident-tabs-mode nil)
   (setq-default require-final-newline t)
   (setq-default truncate-lines t)
+  (setq-default save-place t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'after-init-hook 'recentf-mode)
   (add-hook 'after-init-hook 'ido-mode)
