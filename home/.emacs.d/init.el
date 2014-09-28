@@ -268,7 +268,10 @@
 ;; source: http://www.emacswiki.org/emacs/PythonProgrammingInEmacs#toc5
 
 (defun init-python ()
-  (add-hook 'python-mode-hook 'python-ipython))
+  (expect-packages '(jedi))
+  (add-hook 'python-mode-hook 'python-ipython)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t))
 
 (defun python-ipython ()
   "Use ipython3 in python-shell"
