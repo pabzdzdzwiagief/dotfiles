@@ -166,6 +166,10 @@
 (defun side-with-evil ()
   "Introduce some VI-like behaviour to emacs"
   (setq evil-default-cursor t)
+  (setq evil-emacs-state-cursor '("purple" box))
+  (setq evil-normal-state-cursor '("red" box))
+  (setq evil-insert-state-cursor '("orange" box))
+  (setq evil-visual-state-cursor '("white" box))
   (evil-mode t))
 
 (defun replace-scratch-buffer ()
