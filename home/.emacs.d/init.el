@@ -183,9 +183,10 @@
 (defun init-coding ()
   "Enable things suitable for any programmning task"
   (expect-packages '(git-commit fill-column-indicator column-enforce-mode
-                     yasnippet-bundle auto-complete xlicense projectile
-                     flx-ido helm-projectile flycheck))
+                     yasnippet-bundle auto-complete pos-tip xlicense
+                     projectile flx-ido helm-projectile flycheck))
   (require 'auto-complete-config)
+  (require 'pos-tip)
   (require 'flx-ido)
   (add-hook 'prog-mode-hook 'flx-ido-mode)
   (add-hook 'prog-mode-hook 'projectile-mode)
