@@ -72,6 +72,8 @@
   (make-directory "~/.emacs.d/backups/" t)
   (setq make-backup-files nil)
   (setq save-place-file "~/.emacs.d/saveplace")
+  (setq savehist-file "~/.emacs.d/savehist")
+  (setq recentf-save-file "~/.emacs.d/recentf")
   (when (not (file-exists-p save-place-file))
     (write-region "" nil save-place-file)))
 
@@ -145,7 +147,8 @@
   (setq-default truncate-lines t)
   (setq-default save-place t)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (add-hook 'after-init-hook 'recentf-mode)
+  (add-hook 'after-init-hook 'configure-recentf)
+  (add-hook 'after-init-hook 'savehist-mode)
   (add-hook 'after-init-hook 'ido-mode)
   (add-hook 'after-init-hook 'reuse-buffer-in-dired)
   (add-hook 'after-init-hook 'side-with-evil)
@@ -153,6 +156,12 @@
   (global-set-key (kbd "C-=") 'er/expand-region)
   (global-set-key (kbd "C-x r C-f") 'recentf-open-files)
   (global-set-key (kbd "C-x n C-f") 'find-file-other-frame))
+
+(defun configure-recentf ()
+  (setq recentf-max-saved-items 20)
+  (add-to-list 'recentf-exclude ".*/\.emacs.d/elpa/.*")
+  (add-to-list 'recentf-exclude "/COMMIT_EDITMSG$")
+  (recentf-mode +1))
 
 (defun always-use-horizontal-split ()
   "Make emacs always split horizontally"
@@ -207,6 +216,7 @@
   (add-completion-source ac-source-yasnippet)
   (setq ac-auto-show-menu t)
   (setq ac-quick-help-delay 0.5)
+  (setq ac-max-width (/ 80 2))
   (setq completion-at-point-functions '(auto-complete))
   (auto-complete-mode +1))
 
