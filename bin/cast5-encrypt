@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+exec gpg --armor --cipher-algo=cast5 --output - --symmetric "${1:--}"

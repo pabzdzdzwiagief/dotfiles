@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+exec gpg --no-mdc-warning --cipher-algo=cast5 --output - --decrypt "${1:--}"
