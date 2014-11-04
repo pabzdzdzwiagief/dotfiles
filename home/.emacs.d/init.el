@@ -140,7 +140,9 @@
   (require 'vlf-integrate)
   (custom-set-variables
    '(vlf-application 'dont-ask))
-  (setq scroll-step 1)
+  (setq scroll-step 1
+        scroll-conservatively 10000
+        auto-window-vscroll nil)
   (setq-default tab-width 8)
   (setq-default ident-tabs-mode nil)
   (setq-default require-final-newline t)
