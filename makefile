@@ -4,22 +4,23 @@ BIN_TARGETS = $(notdir $(wildcard bin/*) bin/idea)
 HOME_TARGETS = $(notdir $(wildcard home/.*))
 CONFIG_TARGETS = $(notdir $(wildcard config/*))
 FONTS_TARGETS = SourceCodePro-Bold \
-                SourceCodePro-Light \
-                SourceCodePro-Regular \
-                SourceCodePro-Black \
-                SourceCodePro-ExtraLight \
-                SourceCodePro-Medium \
-                SourceCodePro-Semibold
+		SourceCodePro-Light \
+		SourceCodePro-Regular \
+		SourceCodePro-Black \
+		SourceCodePro-ExtraLight \
+		SourceCodePro-Medium \
+		SourceCodePro-Semibold
 
 .PHONY: install
 install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
-         $(HOME_TARGETS:%=$(NEW_HOME)/%) \
-         $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
-         $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) \
-         $(NEW_HOME)/idea-configuration.jar
+	 $(HOME_TARGETS:%=$(NEW_HOME)/%) \
+	 $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
+	 $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) \
+	 $(NEW_HOME)/idea-configuration.jar
 	fc-cache -f -v
 
-$(NEW_HOME)/.local/bin/idea: | $(NEW_HOME)/.local/bin $(NEW_HOME)/.local/share
+$(NEW_HOME)/.local/bin/idea: idea/download | $(NEW_HOME)/.local/bin \
+					     $(NEW_HOME)/.local/share
 	sh -c "cd idea && ./download"
 	ln -s $(NEW_HOME)/.local/share/idea/bin/idea.sh $@
 
@@ -32,14 +33,16 @@ $(NEW_HOME)/.local/bin/%: | $(NEW_HOME)/.local/bin
 $(NEW_HOME)/.config/%: | $(NEW_HOME)/.config
 	ln -s `bin/relpath config $(NEW_HOME)/.config`/$* $@
 
-$(NEW_HOME)/.fonts/%: | $(NEW_HOME)/.fonts fonts
-	ln -s `bin/relpath fonts $(NEW_HOME)/.fonts`/$* $@
+$(NEW_HOME)/.fonts/%: fonts/% | $(NEW_HOME)/.fonts
+	mv $< $@
 
 $(NEW_HOME)/.: | home/.
+	;
 
 $(NEW_HOME)/..: | home/..
+	;
 
-$(NEW_HOME)/%: | $(NEW_HOME) home/$*
+$(NEW_HOME)/%: home/% | $(NEW_HOME)
 	ln -s `bin/relpath home $(NEW_HOME)`/$* $@
 
 $(NEW_HOME)/.local/bin: | $(NEW_HOME)
@@ -57,5 +60,5 @@ $(NEW_HOME)/.fonts: | $(NEW_HOME)
 $(NEW_HOME):
 	mkdir -p $@
 
-fonts/%.otf:
+fonts/%.otf: fonts/download
 	sh -c "cd fonts && ./download"
