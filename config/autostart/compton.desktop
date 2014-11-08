@@ -1,7 +1,8 @@
 [Desktop Entry]
-Name=xcompmgr
+Name=compton
 Comment=X Composition Manager
-Exec=xcompmgr -cfF -D3
+Exec=compton -c
 Terminal=false
 Type=Application
 NoDisplay=true
+NotShowIn=Unity
