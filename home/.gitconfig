@@ -2,6 +2,9 @@
 excludesfile = .gitignore
 autocrlf = input
 
+[push]
+default = simple
+
 [color]
 branch = auto
 diff = auto
