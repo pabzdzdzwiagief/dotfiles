@@ -1,6 +1,6 @@
 NEW_HOME = $(HOME)
 
-BIN_TARGETS = $(notdir $(wildcard bin/*) bin/idea)
+BIN_TARGETS = $(notdir $(wildcard bin/*))
 HOME_TARGETS = $(notdir $(wildcard home/.*))
 CONFIG_TARGETS = $(notdir $(wildcard config/*))
 FONTS_TARGETS = SourceCodePro-Bold \
@@ -11,13 +11,15 @@ FONTS_TARGETS = SourceCodePro-Bold \
 		SourceCodePro-Medium \
 		SourceCodePro-Semibold
 
-.PHONY: install
+.PHONY: install idea
 install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	 $(HOME_TARGETS:%=$(NEW_HOME)/%) \
 	 $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
-	 $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) \
-	 $(NEW_HOME)/idea-configuration.jar
+	 $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) 
 	fc-cache -f -v
+
+idea: bin/idea $(NEW_HOME)/idea-configuration.jar
+	;
 
 $(NEW_HOME)/.local/bin/idea: idea/download | $(NEW_HOME)/.local/bin \
 					     $(NEW_HOME)/.local/share
