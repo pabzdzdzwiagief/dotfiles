@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=GNU Emacs
+Exec=emacsc %F
+Icon=/usr/share/icons/hicolor/scalable/apps/emacs24.svg
+Terminal=false
+Type=Application
+NoDisplay=true
+Actions=New
+Categories=Utility;Development;TextEditor;
+StartupNotify=false
+
+[Desktop Action New]
+Name=New GNU Emacs window
+Exec=emacsc %F
+OnlyShowIn=Unity
