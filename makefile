@@ -19,12 +19,12 @@ install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	fc-cache -f -v
 
 idea: $(NEW_HOME)/.local/bin/idea $(NEW_HOME)/idea-configuration.jar
-	;
 
 $(NEW_HOME)/.local/bin/idea: idea/download | $(NEW_HOME)/.local/bin \
 					     $(NEW_HOME)/.local/share
 	sh -c "cd idea && ./download"
 	ln -s $(NEW_HOME)/.local/share/idea/bin/idea.sh $@
+	touch $@
 
 $(NEW_HOME)/idea-configuration.jar:
 	sh -c "cd idea/config && ../../bin/zip-create $@ *"
