@@ -18,7 +18,7 @@ install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	 $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) 
 	fc-cache -f -v
 
-idea: bin/idea $(NEW_HOME)/idea-configuration.jar
+idea: $(NEW_HOME)/.local/bin/idea $(NEW_HOME)/idea-configuration.jar
 	;
 
 $(NEW_HOME)/.local/bin/idea: idea/download | $(NEW_HOME)/.local/bin \
