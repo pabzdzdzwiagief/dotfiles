@@ -1,0 +1,29 @@
+[Desktop Entry]
+Name=TMUX
+Comment=Attach TMUX session in urxvt window
+TryExec=tmux-terminal
+Exec=tmux-terminal
+Icon=urxvt_48x48.xpm
+Terminal=false
+Type=Application
+NoDisplay=true
+Actions=New;Java;Native
+Categories=Utility;TerminalEmulator;
+StartupNotify=true
+
+[Desktop Action New]
+Name=New TMUX window
+Exec=tmux-terminal
+OnlyShowIn=Unity
+
+[Desktop Action Java]
+Name=Java Terminal
+Comment=Attach TMUX session inside Java Docker container
+Exec=devbox-javaland
+StartupNotify=false
+
+[Desktop Action Native]
+Name=Native Terminal
+Comment=Attach TMUX session inside Native Docker container
+Exec=devbox-native
+StartupNotify=false
