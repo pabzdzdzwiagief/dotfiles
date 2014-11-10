@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+name=devbox-native
+cmd="${@:-tmux-terminal}"
+if docker ps -a | grep $name
+then
+    echo $cmd | exec docker start -ai $name
+else
+    echo $cmd | exec docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
+        --name $name --hostname $name $name "exec zsh"
+fi
