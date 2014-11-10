@@ -3,6 +3,7 @@ NEW_HOME = $(HOME)
 BIN_TARGETS = $(notdir $(wildcard bin/*))
 HOME_TARGETS = $(notdir $(wildcard home/.*))
 CONFIG_TARGETS = $(notdir $(wildcard config/*))
+AUTOSTART_TARGETS = $(notdir $(wildcard autostart/*))
 FONTS_TARGETS = SourceCodePro-Bold \
 		SourceCodePro-Light \
 		SourceCodePro-Regular \
@@ -15,6 +16,7 @@ FONTS_TARGETS = SourceCodePro-Bold \
 install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	 $(HOME_TARGETS:%=$(NEW_HOME)/%) \
 	 $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
+	 $(AUTOSTART_TARGETS:%=$(NEW_HOME)/.config/autostart/%) \
 	 $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) 
 	fc-cache -f -v
 
@@ -31,6 +33,9 @@ $(NEW_HOME)/idea-configuration.jar:
 
 $(NEW_HOME)/.local/bin/%: | $(NEW_HOME)/.local/bin
 	ln -s `bin/relpath bin $(NEW_HOME)/.local/bin`/$* $@
+
+$(NEW_HOME)/.config/autostart/%: | $(NEW_HOME)/.config/autostart
+	ln -s `bin/relpath autostart $(NEW_HOME)/.config/autostart`/$* $@
 
 $(NEW_HOME)/.config/%: | $(NEW_HOME)/.config
 	ln -s `bin/relpath config $(NEW_HOME)/.config`/$* $@
@@ -51,6 +56,9 @@ $(NEW_HOME)/.local/bin: | $(NEW_HOME)
 	mkdir -p $@
 
 $(NEW_HOME)/.local/share: | $(NEW_HOME)
+	mkdir -p $@
+
+$(NEW_HOME)/.config/autostart: | $(NEW_HOME)/.config
 	mkdir -p $@
 
 $(NEW_HOME)/.config: | $(NEW_HOME)
