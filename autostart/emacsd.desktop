@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Emacs Daemon
+Comment=Start emacs daemon
+Exec=emacsd restart
+Terminal=false
+Type=Application
+NoDisplay=true
