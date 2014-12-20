@@ -54,9 +54,10 @@ sudo apt-get -y install emacs
 ~/.local/bin/emacsd start
 ~/.local/bin/emacsd stop
 
+cd ~/.config/dotfiles/
+git clone . docker/devbox/dotfiles
 cd ~/.config/dotfiles/docker/
 sudo apt-get -y install docker.io
 sudo gpasswd -a $USER docker
 sudo docker build --rm=true -t devbox devbox/
-sudo docker build --rm=true -t devbox-native devbox-native/
-sudo docker build --rm=true -t devbox-javaland devbox-javaland/
+sudo docker run --name devbox-data devbox

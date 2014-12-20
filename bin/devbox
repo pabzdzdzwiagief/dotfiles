@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+cmd="${@:-exec zsh}"
+exec docker run --rm=true -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --name devbox-$$ --hostname devbox-$$ --volumes-from devbox-data devbox "$cmd"

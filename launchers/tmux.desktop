@@ -7,7 +7,7 @@ Icon=urxvt_48x48.xpm
 Terminal=false
 Type=Application
 NoDisplay=true
-Actions=New;Java;Native
+Actions=New;Devbox
 Categories=Utility;TerminalEmulator;
 StartupNotify=true
 
@@ -16,14 +16,8 @@ Name=New TMUX window
 Exec=tmux-terminal
 OnlyShowIn=Unity
 
-[Desktop Action Java]
-Name=Java Terminal
-Comment=Attach TMUX session inside Java Docker container
-Exec=devbox-javaland
-StartupNotify=false
-
-[Desktop Action Native]
-Name=Native Terminal
-Comment=Attach TMUX session inside Native Docker container
-Exec=devbox-native
+[Desktop Action Devbox]
+Name=Devbox Terminal
+Comment=Attach TMUX session inside a Docker container
+Exec=devbox tmux-terminal
 StartupNotify=false

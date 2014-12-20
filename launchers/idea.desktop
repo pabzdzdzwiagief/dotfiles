@@ -1,8 +1,7 @@
 [Desktop Entry]
 Name=IntelliJ IDEA
 Comment=Run IDEA
-TryExec=devbox-idea
-Exec=devbox-idea
+Exec=devbox idea
 Icon=/usr/local/share/icons/idea.png
 Terminal=false
 Type=Application
@@ -12,5 +11,5 @@ StartupNotify=true
 
 [Desktop Action New]
 Name=New IDEA window
-Exec=devbox-idea
+Exec=devbox idea
 OnlyShowIn=Unity
