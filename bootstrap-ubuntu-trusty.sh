@@ -48,6 +48,7 @@ sudo apt-get -y install openbox compton nitrogen
 sudo apt-get -y install dmenu parcellite rxvt-unicode
 sudo apt-get -y install mpd mpc vlc
 sudo update-rc.d mpd disable
+mkdir -p ~/.cache/mpd
 
 sudo apt-get -y install emacs
 ~/.local/bin/emacsd start
