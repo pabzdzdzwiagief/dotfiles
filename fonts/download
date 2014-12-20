@@ -1,6 +1,2 @@
 #!/usr/bin/env sh
-
-wget "http://sourceforge.net/projects/sourcecodepro.adobe/files/SourceCodePro_FontsOnly-1.017.zip"
-../bin/zip-extractall SourceCodePro_FontsOnly-1.017.zip
-mv SourceCodePro_FontsOnly-1.017/OTF/*.otf .
-rm -rf SourceCodePro_FontsOnly-1.017 SourceCodePro_FontsOnly-1.017.zip
+wget -O- 'https://github.com/adobe-fonts/source-code-pro/archive/1.017R.tar.gz' | tar zxvf - --strip 2 --touch --wildcards --no-anchored '*.otf'
