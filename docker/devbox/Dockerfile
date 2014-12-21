@@ -4,6 +4,7 @@ RUN     add-apt-repository ppa:hansjorg/rust
 RUN     apt-get update && apt-get install -y --force-yes \
           zsh \
           wget \
+          curl \
           python \
           build-essential \
           git \
