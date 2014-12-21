@@ -43,7 +43,7 @@ RUN     make install
 RUN     sed -i 's/urxvtc/urxvt/g' bin/tmux-terminal
 WORKDIR /home/developer
 RUN     wget -O- https://static.rust-lang.org/cargo-dist/cargo-nightly-x86_64-unknown-linux-gnu.tar.gz | tar zxvf -
-RUN     ./cargo-nightly-x86_64-unknown-linux-gnu/install.sh --prefix=.local
+RUN     sudo ./cargo-nightly-x86_64-unknown-linux-gnu/install.sh
 RUN     rm -rf ./cargo-nightly-x86_64-unknown-linux-gnu
 RUN     .local/bin/emacsd start && .local/bin/emacsd stop
 WORKDIR /home/developer/.config/dotfiles
