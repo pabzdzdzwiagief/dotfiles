@@ -136,7 +136,7 @@
   "Configure certain aspects of emacs' behaviour"
   (require 'recentf)
   (require 'saveplace)
-  (require 'vlf-integrate)
+  (require 'vlf)
   (custom-set-variables
    '(vlf-application 'dont-ask))
   (setq scroll-step 1
