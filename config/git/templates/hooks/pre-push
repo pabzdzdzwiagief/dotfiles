@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -e
+
+IFS=' '
+while read local_ref local_sha remote_ref remote_sha
+do
+    if $(echo ${local_ref} | tr / '\n' | grep --quiet --line-regexp local)
+    then
+        >2& echo "Not pushing local branch" ${local_ref}
+        exit 1
+    fi
+done

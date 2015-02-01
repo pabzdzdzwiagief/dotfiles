@@ -18,6 +18,9 @@ lg = log --all --graph --pretty=format:'%C(dim yellow)%h%Creset -%C(bold yellow)
 di = diff --color-words
 dic = diff --color-words --cached
 
+[init]
+templatedir = ~/.config/git/templates
+
 # local overrides
 [include]
 path = ~/.config/git/me
