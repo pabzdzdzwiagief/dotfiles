@@ -1,4 +1,4 @@
 export PATH="$PATH":"$HOME/.local/bin"
-export VISUAL=e
+export VISUAL=emacsc
 export EDITOR=ex
 export WINEARCH="win32"
