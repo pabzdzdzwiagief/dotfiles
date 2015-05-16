@@ -6,7 +6,7 @@ autocrlf = input
 default = simple
 
 [pull]
-rebase = true
+rebase = preserve
 
 [color]
 branch = auto
