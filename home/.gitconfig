@@ -20,6 +20,7 @@ st = status -uall
 lg = log --all --graph --pretty=format:'%C(dim yellow)%h%Creset -%C(bold yellow)%d%Creset %s %C(dim green)(%cr) %C(dim yellow)<%an>%Creset'
 di = diff --color-words
 dic = diff --color-words --cached
+addnw = !sh -c 'git diff -w --no-color "$@" | git apply --cached --ignore-whitespace' -
 
 [init]
 templatedir = ~/.config/git/templates
