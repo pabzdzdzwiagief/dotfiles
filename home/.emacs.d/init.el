@@ -103,6 +103,7 @@
    '(show-paren-mode t)
    '(column-number-mode t)
    '(blink-cursor-mode nil))
+  (set-fringe-mode '(0 . 0))
   (global-hl-line-mode t))
 
 (defun set-frame-look ()
