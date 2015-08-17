@@ -1,67 +1,76 @@
-FROM    ubuntu:14.04
-RUN     apt-get update && apt-get install -y software-properties-common
-RUN     add-apt-repository ppa:hansjorg/rust
-RUN     apt-get update && apt-get install -y --force-yes \
-          zsh \
-          wget \
-          curl \
-          python \
-          build-essential \
-          git \
-          emacs \
-          rxvt-unicode \
-          tmux \
-          ipython \
-          ipython3 \
-          python-pip \
-          python-virtualenv \
-          ruby \
-          pypy \
-          clang \
-          rust-nightly \
-          golang \
-          golang-go.tools \
-          cmake \
-          scons \
-          openjdk-7-jdk \
-          openjdk-7-source \
-          maven \
-          gradle \
-          scala \
-          clojure1.4 \
-          groovy
+FROM    debian:jessie
+ENV     DEBIAN_FRONTEND noninteractive
+RUN 	echo 'LANG="C.UTF-8"' > /etc/default/locale
+RUN     apt-get update && apt-get install -y locales
+RUN     update-locale LANG=C.UTF-8
+RUN     update-locale LANGUAGE=C.UTF-8
+RUN     apt-get update && apt-get install -y \
+          sudo=1.8.10p3-1+deb8u2 \
+          apt-transport-https=1.0.9.8
+RUN     apt-get update && apt-get install -y \
+          man \
+          zsh=5.0.7-5 \
+          wget=1.16-1 \
+          curl=7.38.0-4+deb8u2 \
+	  socat=1.7.2.4-2 \
+          python=2.7.9-1 \
+          build-essential=11.7 \
+          git=1:2.1.4-2.1 \
+          emacs=46.1 \
+          rxvt-unicode=9.20-1+b1 \
+          tmux=1.9-6
+RUN	echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
+RUN     echo "deb https://dl.bintray.com/sbt/debian /" > /etc/apt/sources.list.d/sbt.list
+RUN     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
+RUN     apt-get update && apt-get install -y \
+          mercurial=3.1.2-2+deb8u1 \
+          python3=3.4.2-2 \
+          ipython=2.3.0-2 \
+          ipython3=2.3.0-2 \
+          python-pip=1.5.6-5 \
+          python-virtualenv=1.11.6+ds-1 \
+          pypy=2.4.0+dfsg-3 \
+          ruby=1:2.1.5+deb8u1 \
+          nodejs=0.10.29~dfsg-2 \
+          node-underscore=1.7.0~dfsg-1 \
+          npm=1.4.21+ds-2 \
+          clang=1:3.5-25 \
+          cmake=3.0.2-1 \
+          golang=2:1.3.3-1 \
+          golang-go.tools=0.0~hg20140703-4 \
+          openjdk-8-jdk=8u66-b01-1~bpo8+1 \
+          openjdk-8-source=8u66-b01-1~bpo8+1 \
+          maven=3.0.5-3 \
+          gradle=1.5-2 \
+          sbt=0.13.9 \
+          clojure1.6=1.6.0+dfsg-1
+RUN     apt-get update && apt-get install -y \
+          aspell=0.60.7~20110707-1.3 \
+	  aspell-pl=20140516-1 \
+          texlive-full=2014.20141024-2 \
+          evince=3.14.1-2
+RUN     apt-get -y clean
+RUN     curl -sSf https://static.rust-lang.org/rustup.sh > /tmp/rustup.sh
+RUN     sh /tmp/rustup.sh -y
+RUN     rm -v /tmp/rustup.sh
+ENV     PREFIX /usr/local
+RUN     wget 'https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein' -O ${PREFIX}/bin/lein
+RUN     chmod +x ${PREFIX}/bin/lein
+RUN     mkdir -p ${PREFIX}/share/icons
+RUN     wget "https://download.jetbrains.com/idea/ideaIC-14.1.4.tar.gz" -O - | tar -C ${PREFIX}/share/ -zxvf -
+RUN     mv -v --no-target-directory ${PREFIX}/share/idea-IC-* ${PREFIX}/share/idea
+RUN     ln -sv ${PREFIX}/share/idea/bin/idea.png ${PREFIX}/share/icons/idea.png
+RUN     ln -sv ${PREFIX}/share/idea/bin/idea.sh ${PREFIX}/bin/idea
+RUN     readlink -f /usr/bin/javac | sed "s:/bin/javac::" | xargs -i echo JAVA_HOME='"{}"' >> /etc/environment
+RUN     sed 's/^/export /' /etc/environment | grep JAVA_HOME >> /etc/zsh/zshenv
 RUN     groupadd developer
 RUN     useradd -m -g developer -s /usr/bin/zsh developer
 RUN     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer
 RUN     chmod 0440 /etc/sudoers.d/developer
-ADD     dotfiles/ /home/developer/.config/dotfiles/
-RUN     chown -R developer:developer /home/developer/.config/
 USER    developer
 ENV     HOME /home/developer
-WORKDIR /home/developer/.config/dotfiles
-RUN     make install
-RUN     sed -i 's/urxvtc/urxvt/g' bin/tmux-terminal
+ENV     LC_ALL C.UTF-8
 WORKDIR /home/developer
-RUN     wget -O- https://static.rust-lang.org/cargo-dist/cargo-nightly-x86_64-unknown-linux-gnu.tar.gz | tar zxvf -
-RUN     sudo ./cargo-nightly-x86_64-unknown-linux-gnu/install.sh
-RUN     rm -rf ./cargo-nightly-x86_64-unknown-linux-gnu
-RUN     .local/bin/emacsd start && .local/bin/emacsd stop
-WORKDIR /home/developer/.config/dotfiles
-RUN     make idea
-WORKDIR /home/developer
-RUN     mkdir .local/share/sbt
-RUN     wget 'http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.5/sbt-launch.jar' -O .local/share/sbt/sbt-launch.jar
-RUN     echo '#!/usr/bin/env sh\n\
-              SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"\n\
-              exec java $SBT_OPTS -jar $HOME/.local/share/sbt/sbt-launch.jar "$@"' > .local/bin/sbt
-RUN     chmod u+x .local/bin/sbt
-RUN     .local/bin/sbt
-RUN     rm -rf target
-RUN     wget 'https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein' -O .local/bin/lein
-RUN     chmod u+x .local/bin/lein
-RUN     .local/bin/lein
-RUN     mkdir workspace
 VOLUME  /home/developer
-VOLUME  /home/developer/workspace
 CMD     true
 ENTRYPOINT ["/usr/bin/zsh", "-c"]

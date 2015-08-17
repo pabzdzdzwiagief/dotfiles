@@ -1,3 +1,15 @@
 #!/usr/bin/env sh
-cmd="${@:-exec zsh}"
-exec docker run --rm=true -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --name devbox-$$ --hostname devbox-$$ --volumes-from devbox-data devbox "$cmd"
+cmd="${@:-exec sudo login -p -f developer}"
+exec docker run --rm=true -it \
+    --publish 8080:8080 \
+    --publish 8081:8081 \
+    --publish 8082:8082 \
+    --publish 8083:8083 \
+    --publish 8888:80 \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /dev/shm:/dev/shm \
+    --name devbox-$$ \
+    --hostname devbox-$$ \
+    --volumes-from devbox-data \
+    devbox "$cmd"
