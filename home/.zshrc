@@ -25,7 +25,6 @@ setopt autopushd pushdsilent pushdtohome
 setopt pushdignoredups
 
 alias ls='ls --color=auto -F'
-alias mg='mg -n'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
