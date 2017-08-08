@@ -1,2 +1,16 @@
 #!/usr/bin/env sh
-wget -O- 'https://github.com/adobe-fonts/source-code-pro/archive/1.017R.tar.gz' | tar zxvf - --strip 2 --touch --wildcards --no-anchored '*.otf'
+
+set -e
+set -u
+set -x
+
+if ! git fetch origin release
+then
+        git init
+        git config core.sparseCheckout true
+        mkdir .git/info
+        echo "OTF/**/*" >> .git/info/sparse-checkout
+        git remote add --master release origin 'https://github.com/adobe-fonts/source-code-pro.git'
+        git fetch --depth 1 origin release
+fi
+git checkout release

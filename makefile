@@ -12,13 +12,17 @@ FONTS_TARGETS = SourceCodePro-Bold \
 		SourceCodePro-Medium \
 		SourceCodePro-Semibold
 
-.PHONY: install idea
+.PHONY: install-fonts install idea
+
+install-fonts: $(FONTS_TARGETS:%=$(NEW_HOME)/.local/share/fonts/source-code-pro/%.otf)
+	fc-cache -f -v
+
 install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	 $(HOME_TARGETS:%=$(NEW_HOME)/%) \
 	 $(CONFIG_TARGETS:%=$(NEW_HOME)/.config/%) \
 	 $(AUTOSTART_TARGETS:%=$(NEW_HOME)/.config/autostart/%) \
-	 $(FONTS_TARGETS:%=$(NEW_HOME)/.fonts/%.otf) 
-	fc-cache -f -v
+	 install-fonts
+	;
 
 idea: $(NEW_HOME)/.local/bin/idea $(NEW_HOME)/idea-configuration.jar
 
@@ -40,7 +44,7 @@ $(NEW_HOME)/.config/autostart/%: | $(NEW_HOME)/.config/autostart
 $(NEW_HOME)/.config/%: | $(NEW_HOME)/.config
 	ln -s `bin/relpath config $(NEW_HOME)/.config`/$* $@
 
-$(NEW_HOME)/.fonts/%: fonts/% | $(NEW_HOME)/.fonts
+$(NEW_HOME)/.local/share/fonts/source-code-pro/%: fonts/OTF/% | $(NEW_HOME)/.local/share/fonts/source-code-pro
 	mv $< $@
 
 $(NEW_HOME)/.: | home/.
@@ -64,11 +68,11 @@ $(NEW_HOME)/.config/autostart: | $(NEW_HOME)/.config
 $(NEW_HOME)/.config: | $(NEW_HOME)
 	mkdir -p $@
 
-$(NEW_HOME)/.fonts: | $(NEW_HOME)
+$(NEW_HOME)/.local/share/fonts/source-code-pro: | $(NEW_HOME)
 	mkdir -p $@
 
 $(NEW_HOME):
 	mkdir -p $@
 
-fonts/%.otf: fonts/download
+fonts/OTF/%.otf: fonts/download
 	sh -c "cd fonts && ./download"
