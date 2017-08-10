@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+SESSION=urxvt
+xrdb -merge ~/.config/rxvt-unicode/rxvt-unicode.conf
+exec urxvtc -title urxvt -e tmux-session urxvt

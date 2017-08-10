@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=Rxvt Color Unicode Terminal
+Comment=Use the command line
+TryExec=urxvt-tmux
+Exec=urxvt-tmux
+Icon=urxvt_48x48.xpm
+Type=Application
+Categories=Utility;TerminalEmulator;
+StartupNotify=true
+Keywords=Run;
+Actions=New
+
+[Desktop Action New]
+Name=New Rxvt Color Unicode Terminal
+Exec=urxvt-tmux
+OnlyShowIn=Unity
+
+[Desktop Action Devbox]
+Name=Devbox Terminal
+Comment=New Rxvt Color Unicode Terminal inside a Docker container
+Exec=devbox urxvt-tmux
+StartupNotify=false
+OnlyShowIn=Unity

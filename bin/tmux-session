@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+set -u
+
+SESSION=${1}
+if tmux has-session -t ${1}
+then
+    exec tmux attach-session -t ${SESSION}
+else
+    exec tmux -f ~/.config/tmux/tmux.conf new-session -s ${SESSION}
+fi
