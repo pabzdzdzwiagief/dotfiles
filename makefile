@@ -12,7 +12,9 @@ FONTS_TARGETS = SourceCodePro-Bold \
 		SourceCodePro-Medium \
 		SourceCodePro-Semibold
 
-.PHONY: install-fonts install idea
+.PHONY: install-fonts \
+        install-idea \
+        install
 
 install-fonts: $(FONTS_TARGETS:%=$(NEW_HOME)/.local/share/fonts/source-code-pro/%.otf)
 	fc-cache -f -v
@@ -24,7 +26,7 @@ install: $(BIN_TARGETS:%=$(NEW_HOME)/.local/bin/%) \
 	 install-fonts
 	;
 
-idea: $(NEW_HOME)/.local/bin/idea $(NEW_HOME)/idea-configuration.jar
+install-idea: $(NEW_HOME)/.local/bin/idea $(NEW_HOME)/idea-configuration.jar
 
 $(NEW_HOME)/.local/bin/idea: idea/download | $(NEW_HOME)/.local/bin \
 					     $(NEW_HOME)/.local/share
