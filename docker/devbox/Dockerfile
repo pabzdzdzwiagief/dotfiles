@@ -61,6 +61,7 @@ RUN     wget "https://download.jetbrains.com/idea/ideaIC-14.1.4.tar.gz" -O - | t
 RUN     mv -v --no-target-directory ${PREFIX}/share/idea-IC-* ${PREFIX}/share/idea
 RUN     ln -sv ${PREFIX}/share/idea/bin/idea.png ${PREFIX}/share/icons/idea.png
 RUN     ln -sv ${PREFIX}/share/idea/bin/idea.sh ${PREFIX}/bin/idea
+RUN     update-alternatives --list java | grep java-8 | xargs update-alternatives --set java
 RUN     readlink -f /usr/bin/javac | sed "s:/bin/javac::" | xargs -i echo JAVA_HOME='"{}"' >> /etc/environment
 RUN     sed 's/^/export /' /etc/environment | grep JAVA_HOME >> /etc/zsh/zshenv
 RUN     groupadd developer
