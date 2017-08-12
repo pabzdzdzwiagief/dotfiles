@@ -69,9 +69,11 @@ RUN     useradd -m -g developer -s /usr/bin/zsh developer
 RUN     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer
 RUN     chmod 0440 /etc/sudoers.d/developer
 USER    developer
+RUN	mkdir -p /home/developer/workspace
 ENV     HOME /home/developer
 ENV     LC_ALL C.UTF-8
 WORKDIR /home/developer
 VOLUME  /home/developer
+VOLUME  /home/developer/workspace
 CMD     true
 ENTRYPOINT ["/usr/bin/zsh", "-c"]
