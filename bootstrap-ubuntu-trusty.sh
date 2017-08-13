@@ -33,7 +33,7 @@ cd ~/.config/
 git clone 'https://pabzdzdzwiagief@github.com/pabzdzdzwiagief/dotfiles'
 cd dotfiles/
 make install
-make idea
+make install-idea
 cd
 sudo mkdir /usr/local/share/icons
 sudo cp ~/.local/share/idea/bin/idea.png /usr/local/share/icons
@@ -54,8 +54,6 @@ sudo apt-get -y install emacs
 ~/.local/bin/emacsd start
 ~/.local/bin/emacsd stop
 
-cd ~/.config/dotfiles/
-git clone . docker/devbox/dotfiles
 cd ~/.config/dotfiles/docker/
 sudo apt-get -y install docker.io
 sudo gpasswd -a $USER docker

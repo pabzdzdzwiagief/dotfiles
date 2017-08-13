@@ -4,13 +4,16 @@ set -e
 set -u
 set -x
 
-if ! git fetch origin release
+REF=2.030R-ro/1.050R-it
+
+if ! git checkout ${REF} --
 then
         git init
         git config core.sparseCheckout true
-        mkdir .git/info
-        echo "OTF/**/*" >> .git/info/sparse-checkout
-        git remote add --master release origin 'https://github.com/adobe-fonts/source-code-pro.git'
-        git fetch --depth 1 origin release
+        mkdir -p .git/info
+        echo "OTF/**/*" > .git/info/sparse-checkout
+        git remote add origin 'https://github.com/adobe-fonts/source-code-pro.git' || true
+        git fetch --depth 1 origin ${REF}
+        git tag -f ${REF} FETCH_HEAD
 fi
-git checkout release
+git reset --hard ${REF} --
