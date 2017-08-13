@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+cmd="${@:-sudo login -p -f player}"
+if [ -z ${@} ]
+then
+    terminal="-t"
+fi
+exec docker run --rm=true -i --name gogbox --hostname gogbox \
+    ${terminal} \
+    --env="USER_UID=$(id -u)" \
+    --env="USER_GID=$(id -g)" \
+    --env="DISPLAY=${DISPLAY}" \
+    --env="PULSE_SERVER=/run/pulse/native" \
+    --volume=/run/user/$(id -u)/pulse:/run/pulse \
+    --volume=/tmp/.X11-unix:/tmp/.X11-unix:rw \
+    --volume="${HOME}/Downloads:/tmp:rw" \
+    --volume=/dev/dri/card0:/dev/dri/card0:rw --privileged \
+    --volume="${HOME}/Games/gogbox:/home/player:rw" \
+    gogbox:latest $cmd
+
