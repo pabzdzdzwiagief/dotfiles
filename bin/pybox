@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+cmd="${@:-sudo login -p -f developer}"
+if [ -z ${@} ]
+then
+    terminal="-t"
+fi
+exec docker run --rm=true -i --name pybox --hostname pybox \
+    ${terminal} \
+    --env="USER_UID=$(id -u)" \
+    --env="USER_GID=$(id -g)" \
+    --publish 8888:8888 \
+    --volume="${HOME}/Workspace/pybox:/home/developer/workspace:rw" \
+    pybox:latest $cmd
